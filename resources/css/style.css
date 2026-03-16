@@ -111,7 +111,7 @@ footer a:hover {
 }
 
 .hero-section {
-    background: linear-gradient(rgba(46, 204, 113, 0.9), rgba(39, 174, 96, 0.8)), url('https://images.unsplash.com/photo-1450778869180-41d0601e046e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+    background: linear-gradient(rgba(46, 204, 112, 0.822), rgba(39, 174, 95, 0.514)), url('https://images.unsplash.com/photo-1450778869180-41d0601e046e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
     background-size: cover;
     background-position: center;
     color: white;

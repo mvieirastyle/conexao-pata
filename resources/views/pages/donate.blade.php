@@ -2,7 +2,7 @@
 
 @section('content')
 <section class="py-5 bg-orange text-white header-small"
-    style="background-image: -moz-linear-gradient( rgba(226, 102, 0, 0.212), rgba(252, 134, 0, 0.233)), url('images/DonateImg.jpg'); background-size: cover; background-position: center;">
+    style="background-image: -moz-linear-gradient( #e26600c2, #fc860093), url('images/DonateImg.jpg'); background-size: cover; background-position: center;">
     <div class="container text-center">
         <h1 class="display-4">Doar</h1>
         <p class="lead">Ajude nos a dar a estes animais uma segunda oportunidade</p>
