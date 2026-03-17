@@ -45,7 +45,6 @@ class UserController extends Controller
 
     public function add(UserRequest $request)
     {
-
         $request->validated();
 
         User::createNewAdmin($request->all());

@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests\AnimalRequest;
 use App\Models\Animal;
 use App\Models\Category;
@@ -11,7 +10,6 @@ use App\Models\Vacina;
 use App\Exports\AnimalsExport;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
-use Illuminate\Support\Facades\Request as FacadesRequest;
 use Maatwebsite\Excel\Facades\Excel;
 
 class AnimalController extends Controller

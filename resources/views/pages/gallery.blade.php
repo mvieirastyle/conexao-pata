@@ -8,17 +8,16 @@
     </div>
 </section>
 
+<div class="container">
+    <div class="alert alert-success border-0 shadow-sm" role="alert">
+        <i class="fas fa-info-circle me-2"></i>
+        {{__('front_end.gallery.text_info_one')}}</p>
+        <p>{!!__('front_end.gallery.text_info_two')!!}</p>
+        <p>{!!__('front_end.gallery.text_info_three')!!}</p>
+    </div>
 
-<form method="GET" action="/gallery">
+    <form method="GET" action="/gallery">
 
-    <div class="container">
-
-        <div class="alert alert-success border-0 shadow-sm" role="alert">
-            <i class="fas fa-info-circle me-2"></i>
-            {{__('front_end.gallery.text_info_one')}}</p>
-            <p>{!!__('front_end.gallery.text_info_two')!!}</p>
-            <p>{!!__('front_end.gallery.text_info_three')!!}</p>
-        </div>
 
         <section class="section-padding">
 
@@ -83,44 +82,44 @@
                     </div>
                 </div>
             </div>
-</form>
+    </form>
 
-<div class="row g-4">
-    @forelse($animals as $animal)
-    <div class="col-md-6 col-lg-4 animal-card">
-        <div class="card card-custom h-100">
-            <a href="/animal/{{ $animal->id }}" class="text-decoration-none text-dark">
-                <img src="{{Storage::url($animal->fotos->first()?->path)}}" class="card-img-top"
-                    alt="{{ $animal->nome}}" style="height: 250px; object-fit: cover;">
-            </a>
-            <div class="card-body">
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <a href="/animal/{{ $animal->id}}" class="text-decoration-none text-dark">
-                        <h5 class="card-title mb-0 hover-green">{{ $animal->nome}} </h5>
-                    </a>
-                    <span class="badge bg-success">{{ $animal->category->type}}</span>
+    <div class="row g-4">
+        @forelse($animals as $animal)
+        <div class="col-md-6 col-lg-4 animal-card">
+            <div class="card card-custom h-100">
+                <a href="/animal/{{ $animal->id }}" class="text-decoration-none text-dark">
+                    <img src="{{Storage::url($animal->fotos->first()?->path)}}" class="card-img-top"
+                        alt="{{ $animal->nome}}" style="height: 250px; object-fit: cover;">
+                </a>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center mb-2">
+                        <a href="/animal/{{ $animal->id}}" class="text-decoration-none text-dark">
+                            <h5 class="card-title mb-0 hover-green">{{ $animal->nome}} </h5>
+                        </a>
+                        <span class="badge bg-success">{{ $animal->category->type}}</span>
+                    </div>
+                    <p class="card-text text-muted">
+                        • {{ $animal->idade}}
+                        • {{ $animal->sexo}}
+                        • {{ $animal->porte }}
+                    </p>
+                    <p class="card-text text-truncate">{{ $animal->storytelling}}</p>
                 </div>
-                <p class="card-text text-muted">
-                    • {{ $animal->idade}}
-                    • {{ $animal->sexo}}
-                    • {{ $animal->porte }}
-                </p>
-                <p class="card-text text-truncate">{{ $animal->storytelling}}</p>
-            </div>
-            <div class="card-footer bg-transparent border-top-0 pb-3">
-                <a href="/animal/{{ $animal->id}}"
-                    class="btn btn-outline-success w-100">{{__('front_end.gallery.see_details')}}</a>
+                <div class="card-footer bg-transparent border-top-0 pb-3">
+                    <a href="/animal/{{ $animal->id}}"
+                        class="btn btn-outline-success w-100">{{__('front_end.gallery.see_details')}}</a>
+                </div>
             </div>
         </div>
+        @empty
+        <label class="text-center py-4">
+            {{__('animal.not_found')}}
+        </label>
+        @endforelse
     </div>
-    @empty
-    <label class="text-center py-4">
-        {{__('animal.not_found')}}
-    </label>
-    @endforelse
-</div>
-<div class="mt-3 align-items-end justify-content-end d-flex">
-    {{ $animals->links() }}
-</div>
-</section>
-@endsection
+    <div class="mt-3 align-items-end justify-content-end d-flex">
+        {{ $animals->links() }}
+    </div>
+    </section>
+    @endsection

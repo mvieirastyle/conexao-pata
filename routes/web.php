@@ -16,6 +16,7 @@ use App\Exports\AnimalsChartExport;
 use App\Exports\AdocoesChartExport;
 use App\Exports\MicrochipsChartExport;
 use App\Exports\EntradasChartExport;
+use App\Http\Controllers\FormsController;
 use Maatwebsite\Excel\Facades\Excel;
 
 
@@ -34,9 +35,19 @@ Route::get('/donate', function () {return view('pages.donate');});
 
 Route::get('/volunteer', function () {return view('pages.volunteer');});
 
+Route::get('/form-volunteer', [FormsController::class, 'showVolunteerForm']);
+
+Route::post('/form-volunteer', [FormsController::class,'sendVolunteerForm']);
+
+Route::get('/form-fat', [FormsController::class, 'showFatForm']);
+
+Route::post('/form-fat', [FormsController::class, 'sendFatForm']);
+
 Route::get('/relevance', [RelevanceController::class, 'show']);
 
 Route::get('/contact', [ContactController::class, 'show']);
+
+Route::post('/contact', [ContactController::class, 'send']);
 
 Route::get('/login', [AuthController::class, 'showLogin']);
 

@@ -10,7 +10,7 @@
 
 <section class="section-padding">
     <div class="container">
-        <div class="row mb-3">
+        <div class="row mb-5">
             <div class="col-lg-12 mx-auto">
                 <h3 class="section-title">Voluntariado</h3>
                 <p>O voluntariado é a força vital que impulsiona o nosso trabalho no canil e gatil municipal. São os
@@ -43,9 +43,48 @@
                     juntarem à nossa equipa e fazerem a diferença na vida dos nossos animais.</p>
                 </p>
 
-                <p>Para se voluntariar, preencha o nosso formulário de inscrição ou contacte-nos através do nosso email ou telefone.</p>
+                <p>
+                    <strong>Para se voluntariar, preencha o nosso formulário de inscrição ou contacte-nos através do
+                        nosso email
+                        ou telefone.</strong>
+                </p>
+                <a href="/form-volunteer" class="btn btn-orange">Formulario de voluntariado</a>
+            </div>
+        </div>
 
-                <a href="#" class="btn btn-orange">Formulario de voluntariado</a>
+        <div class="row mb-3">
+            <div class="col-lg-12 mx-auto">
+                <h3 class="section-title">Como se tornar uma FAT (Família de Acolhimento Temporário)</h3>
+                <p>
+                    Se não pode adotar um animal de forma permanente, pode ainda assim mudar uma vida. O acolhimento
+                    temporário é, muitas vezes, a diferença entre um animal continuar preso num canil ou ter finalmente
+                    a oportunidade de recuperar, ganhar confiança e encontrar uma família definitiva.
+                </p>
+                <p>
+                    Ao abrir temporariamente as portas da sua casa, está a oferecer algo que nenhum abrigo consegue
+                    substituir: atenção, estabilidade e carinho. Esse tempo pode ser fundamental para que o animal
+                    recupere física e emocionalmente e tenha uma verdadeira segunda oportunidade.
+                </p>
+                <p>
+                    Registar-se na nossa base de dados não implica qualquer compromisso permanente. Encaramos a
+                    inscrição apenas como uma demonstração de disponibilidade para ajudar quando for possível. Quando
+                    surgir um caso compatível consigo, entraremos em contacto — e poderá decidir se pode acolher nesse
+                    momento.
+                </p>
+                <p>
+                    Ser uma FAT (Família de Acolhimento Temporário) é um gesto simples que pode ter um impacto enorme na
+                    vida de um animal. Se tem um pouco de espaço, tempo e vontade de ajudar, pode ser exatamente a
+                    pessoa que fará a diferença.
+                </p>
+
+                <p>
+                    <strong>Para se voluntariar, preencha o nosso formulário de inscrição ou contacte-nos através do
+                        nosso email
+                        ou telefone.</strong>
+                </p>
+
+
+                <a href="/form-fat" class="btn btn-orange">Formulario FAT</a>
             </div>
         </div>
     </div>
