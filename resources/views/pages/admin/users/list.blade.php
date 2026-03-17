@@ -110,7 +110,7 @@
                                     title="Editar"><i class="fas fa-edit"></i></a>
 
                                 <form action="/admin/users/delete/{{$user->id}}" method="POST" class="d-inline"
-                                    onsubmit="return confirm('{{__('animal.confirmed')}}');">
+                                    onsubmit="return confirm('Tem certeza que deseja eliminar este utilizador?');">
                                     @csrf
                                     <button type="submit" class="btn btn-sm btn-danger" title="Eliminar">
                                         <i class="fas fa-trash"></i>

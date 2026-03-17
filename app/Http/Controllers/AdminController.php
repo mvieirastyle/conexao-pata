@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Charts\AdocoesChart;
+use App\Charts\AdoptionsChart;
 use App\Models\Animal;
 use App\Charts\AnimalsChart;
 use App\Charts\EntradasChart;
@@ -19,7 +20,7 @@ class AdminController extends Controller
         ]);
     }
 
-    public function dashboard(AnimalsChart $chartAnimals, AdocoesChart $chartAdocoes, EntradasChart $chartEntradas, MicrochipsChart $chartMicrochips, Request $request)
+    public function dashboard(AnimalsChart $chartAnimals, AdocoesChart $chartAdocoes, EntradasChart $chartEntradas, MicrochipsChart $chartMicrochips, AdoptionsChart $chartAdoptions, Request $request)
     {
         $start = $request->input('start_date');
         $end = $request->input('end_date');
@@ -29,6 +30,7 @@ class AdminController extends Controller
             'chartMicrochips' => $chartMicrochips->build(),
             'chartAdocoes' => $chartAdocoes->build($start,$end),
             'chartEntradas' => $chartEntradas->build($start,$end),
+            'chartAdoptions' => $chartAdoptions->build($start,$end),
         ]);
     }
 }

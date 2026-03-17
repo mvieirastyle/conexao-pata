@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>relatorio-grafico-adocoes-e-entradas</title>
+    <title>relatorio-grafico-adoções</title>
 </head>
 
 <body>
@@ -12,23 +12,23 @@
     <h1>Relatorio Interno CROACB</h1>
 
     <p>Este documento informa que, até ao presente momento em que foi disponibilizado, encontram-se registadas as
-        seguintes quantidades de animais adotados e acolhidos, por mês e ano, no respetivo intervalo de tempo. 
+        seguintes quantidades de animais adotados, por mês e ano, no respetivo intervalo de tempo. 
     </p>
 
     <table>
         <thead>
             <tr>
                 <th>Mês/ano</th>
-                <th>Quantidade de animais adotados</th>
-                <th>Quantidade de animais acolhidos</th>
+                <th>Quantidade de adoções (Cães)</th>
+                <th>Quantidade de adoções (Gatos)</th>
             </tr>
         </thead>
         <tbody>
             @foreach($rows as $row)
             <tr>
                 <td>{{ $row['Mês/ano'] }}</td>
-                <td>{{ $row['Qnt. Adoções'] }}</td>
-                <td>{{ $row['Qnt. Acolhimentos'] }}</td>
+                <td>{{ $row['Quantidade de adoções - Cães'] }}</td>
+                <td>{{ $row['Quantidade de adoções - Gatos'] }}</td>
             </tr>
             @endforeach
         </tbody>
@@ -37,7 +37,7 @@
     <style>
         table {
             width: 100%;
-            border-collapse: collapse;  
+            border-collapse: collapse;
             font-family: Arial, Helvetica, sans-serif;
             font-size: 14px;
         }

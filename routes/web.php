@@ -14,6 +14,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Exports\AnimalsChartExport;
 use App\Exports\AdocoesChartExport;
+use App\Exports\AdoptionsChartExport;
 use App\Exports\MicrochipsChartExport;
 use App\Exports\EntradasChartExport;
 use App\Http\Controllers\FormsController;
@@ -96,18 +97,22 @@ Route::middleware('admin')->group(function () {
         Route::get('/adocoes-pdf', [AnimalController::class, 'generatePdfAdocoesChart']);
         Route::get('/microchips-pdf', [AnimalController::class, 'generatePdfMicrochipsChart']);
         Route::get('/entradas-pdf', [AnimalController::class, 'generatePdfEntradasChart']);
+        Route::get('/adoptions-pdf', [AnimalController::class, 'generatePdfAdoptionsChart']);
 
         Route::get('/animais-excel', function () {
             return Excel::download(new AnimalsChartExport, 'relatorio-animais.xlsx');
         });
         Route::get('/adocoes-excel', function () {
-            return Excel::download(new AdocoesChartExport, 'relatorio-adocoes.xlsx');
+            return Excel::download(new AdocoesChartExport, 'relatorio-adocoes-e-entradas.xlsx');
         });
         Route::get('/microchips-excel', function () {
             return Excel::download(new MicrochipsChartExport, 'relatorio-microchipagem.xlsx');
         });
         Route::get('/entradas-excel', function () {
             return Excel::download(new EntradasChartExport, 'relatorio-entradas.xlsx');
+        });
+         Route::get('/adoptions-excel', function () {
+            return Excel::download(new AdoptionsChartExport, 'relatorio-adocoes.xlsx');
         });
 
 

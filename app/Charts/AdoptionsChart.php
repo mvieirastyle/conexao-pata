@@ -6,7 +6,7 @@ use App\Models\Animal;
 use ArielMejiaDev\LarapexCharts\LarapexChart;
 use Illuminate\Support\Carbon;
 
-class EntradasChart
+class AdoptionsChart
 {
     protected $chart;
 
@@ -15,29 +15,29 @@ class EntradasChart
         $this->chart = $chart;
     }
 
-    public function build($inicioData = null, $fimData = null): \ArielMejiaDev\LarapexCharts\HorizontalBar
+    public function build($inicialDate = null, $lastDate = null): \ArielMejiaDev\LarapexCharts\HorizontalBar
     {
         $labels = [];
         $counts = [
             'Cães' => [],
             'Gatos' => [],
         ];
-        
-        $inicio = request('inicioData');
-        $fim = request('fimData');
+
+        $inicialDate = request('inicialDate');
+        $lastDate = request('lastDate');
 
         $query = Animal::query();
 
-        if ($inicio && $fim) {
-            $query->whereBetween('data_entrada', [$inicio, $fim]);
+        if ($inicialDate && $lastDate) {
+            $query->whereBetween('data_adocao', [$inicialDate, $lastDate]);
         }
 
         $data = $query->get();
 
 
         $data = $query->selectRaw("
-                YEAR(data_entrada) as year,
-                MONTH(data_entrada) as month,
+                YEAR(data_adocao) as year,
+                MONTH(data_adocao) as month,
                 category_id,
                 COUNT(*) as total
             ")
@@ -64,7 +64,7 @@ class EntradasChart
         }
 
         $horizontalChart = $this->chart->horizontalBarChart()
-            ->setTitle('Quantidade de Animais Acolhidos por Mês')
+            ->setTitle('Quantidade de Animais Adotados por Mês')
             ->setXAxis($labels)
             ->setGrid(color: '#bebebe', opacity: 0.1, strokeDashArray: 10)
             ->setColors(['#00aa69', '#ffaf46']);

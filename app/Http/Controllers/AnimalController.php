@@ -34,13 +34,13 @@ class AnimalController extends Controller
         if (request('size')) {
             $query->where('porte', request('size'));
         }
-      
+
         if (request('disponivel')) {
             $query->where('disponivel', request('disponivel'));
         }
 
         $animals = $query->paginate(6)->withQueryString();
-        
+
         return view('pages.admin.animal.list', [
             'animals' => $animals,
         ]);
@@ -147,40 +147,60 @@ class AnimalController extends Controller
 
     public function generatePdfAdocoesChart($startDate = null, $endDate = null)
     {
-        $query = Animal::whereNotNull('data_adocao');
-
+        $adocoesQuery = Animal::whereNotNull('data_adocao');
         if ($startDate) {
-            $query->whereDate('data_adocao', '>=', $startDate);
+            $adocoesQuery->whereDate('data_adocao', '>=', $startDate);
         }
-
         if ($endDate) {
-            $query->whereDate('data_adocao', '<=', $endDate);
+            $adocoesQuery->whereDate('data_adocao', '<=', $endDate);
         }
-
-        $data = $query->selectRaw("
-                YEAR(data_adocao) as year,
-                MONTH(data_adocao) as month,
-                COUNT(*) as total
-            ")
+        $adocoes = $adocoesQuery->selectRaw("
+            YEAR(data_adocao) as year,
+            MONTH(data_adocao) as month,
+            COUNT(*) as total
+        ")
             ->groupBy('year', 'month')
             ->orderBy('year')
             ->orderBy('month')
-            ->get();
+            ->get()
+            ->keyBy(fn($item) => $item->year . '-' . $item->month);
+
+        $entradasQuery = Animal::whereNotNull('data_entrada');
+        if ($startDate) {
+            $entradasQuery->whereDate('data_entrada', '>=', $startDate);
+        }
+        if ($endDate) {
+            $entradasQuery->whereDate('data_entrada', '<=', $endDate);
+        }
+        $entradas = $entradasQuery->selectRaw("
+            YEAR(data_entrada) as year,
+            MONTH(data_entrada) as month,
+            COUNT(*) as total
+        ")
+            ->groupBy('year', 'month')
+            ->orderBy('year')
+            ->orderBy('month')
+            ->get()
+            ->keyBy(fn($item) => $item->year . '-' . $item->month);
+
+
+        $allKeys = $adocoes->keys()->merge($entradas->keys())->unique()->sort();
 
         $rows = [];
-
-        foreach ($data as $row) {
-            $monthName = \Carbon\Carbon::create()->month($row->month)->translatedFormat('M');
+        foreach ($allKeys as $key) {
+            [$year, $month] = explode('-', $key);
+            $monthName = Carbon::create()->month((int)$month)->translatedFormat('M');
 
             $rows[] = [
-                'Mês/ano' => $monthName . '/' . $row->year,
-                'Qnt. Adoções' => $row->total,
+                'Mês/ano' => $monthName . '/' . $year,
+                'Qnt. Adoções' => $adocoes[$key]->total ?? 0,
+                'Qnt. Acolhimentos' => $entradas[$key]->total ?? 0,
             ];
         }
 
         $pdf = Pdf::loadView('pages.admin.pdf-adocoes', ['rows' => $rows]);
 
-        return $pdf->download('relatorio-adocoes-grafico.pdf');
+        return $pdf->download('relatorio-adocoes-e-acolhimentos.pdf');
     }
 
     public function generatePdfMicrochipsChart(array $rows = [])
@@ -252,5 +272,52 @@ class AnimalController extends Controller
         $pdf = Pdf::loadView('pages.admin.pdf-entradas', ['rows' => $rows]);
 
         return $pdf->download('relatorio-entradas-grafico.pdf');
+    }
+
+     public function generatePdfAdoptionsChart($inicialDate = null, $lastDate = null)
+    {
+        $rows = [];
+
+        $query = Animal::whereNotNull('data_adocao');
+
+        if ($inicialDate) {
+            $query->whereDate('data_adocao', '>=', $inicialDate);
+        }
+
+        if ($lastDate) {
+            $query->whereDate('data_adocao', '<=', $lastDate);
+        }
+
+
+        $data = $query->selectRaw("
+                YEAR(data_adocao) as year,
+                MONTH(data_adocao) as month,
+                category_id,
+                COUNT(*) as total
+            ")
+            ->groupBy('year', 'month', 'category_id')
+            ->orderBy('year')
+            ->orderBy('month')
+            ->get();
+
+        $months = [];
+
+        foreach ($data as $row) {
+            $monthKey = $row->month . '-' . $row->year;
+            $months[$monthKey]['month'] = $row->month;
+            $months[$monthKey]['year'] = $row->year;
+            $months[$monthKey][$row->category_id] = $row->total;
+        }
+
+        foreach ($months as $monthKey => $monthData) {
+            $rows[] = [
+                'Mês/ano' => Carbon::create()->month($monthData['month'])->translatedFormat('M') . '/' . $monthData['year'],
+                'Quantidade de adoções - Cães' => $monthData[1] ?? 0,
+                'Quantidade de adoções - Gatos' => $monthData[2] ?? 0,
+            ];
+        }
+        $pdf = Pdf::loadView('pages.admin.pdf-adoptions', ['rows' => $rows]);
+
+        return $pdf->download('relatorio-adocoes-grafico.pdf');
     }
 }
