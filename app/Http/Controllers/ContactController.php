@@ -12,7 +12,8 @@ class ContactController extends Controller
      return view('pages.contact');
     }
 
-    public function send(Request $request){
+    public function sendContactForm(Request $request){
+        
         $data = $request->validate([
             'full_name' => 'required|string|max:25',
             'email' => 'required|email|max:55',
@@ -20,7 +21,7 @@ class ContactController extends Controller
             'message' => 'required|string',
         ]);
         
-        FormContact::create($data); 
+        FormContact::createNew($data); 
 
         return redirect('/contact')->with('success', 'Mensagem enviada com sucesso!');
     }

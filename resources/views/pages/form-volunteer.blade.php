@@ -5,7 +5,6 @@
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-lg-10">
-
             <div class="card shadow">
                 <div class="card-header bg-success text-white">
                     <h4 class="mb-0"><i class="fas fa-plus-circle"></i> Juntar-se ao voluntariado</h4>

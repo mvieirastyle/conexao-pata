@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class FormContact extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = [
         'full_name',
         'email',
@@ -13,7 +15,7 @@ class FormContact extends Model
         'message',
     ];
 
-    public static function create(array $data)
+    public static function createNew(array $data = [])
     {
         return self::create([
             'full_name' => $data['full_name'],

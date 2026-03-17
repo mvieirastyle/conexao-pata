@@ -7,9 +7,24 @@
         <p class="lead">{{__('front_end.contact.subtitle')}}</p>
     </div>
 </header>
-
 <section class="section-padding">
-    <div class="container">
+ <div class="container">
+     @if (session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-triangle me-2"></i>
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
+    @if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle me-2"></i>
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
         <div class="row">
             <!-- Contact Info -->
             <div class="col-lg-5 mb-5">
@@ -56,31 +71,32 @@
                 <div class="card shadow-sm border-0">
                     <div class="card-body p-4">
                         <h3 class="mb-4">{{__('front_end.contact.title_message')}}</h3>
-                        <?php
-                        $subject_val = isset($_REQUEST['subject']) ? htmlspecialchars($_REQUEST['subject']) : '';
-                        ?>
-                         <form method="POST" action="/contact" enctype="multipart/form-data">
+                        <form method="POST" action="/contact" enctype="multipart/form-data">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6 mb-3">
-                                    <label for="contactName" class="form-label">{{__('front_end.contact.name')}}</label>
-                                    <input type="text" value="{{ Auth::check() ? Auth::user()->first_name . ' ' . Auth::user()->last_name : '' }}" class="form-control" id="full_name" required>
+                                    <label for="full_name" class="form-label">{{__('front_end.contact.name')}}</label>
+                                    <input type="text"
+                                        value="{{ Auth::check() ? Auth::user()->first_name . ' ' . Auth::user()->last_name : '' }}"
+                                        class="form-control" name="full_name" id="full_name" required>
                                 </div>
                                 <div class="col-md-6 mb-3">
-                                    <label for="contactEmail" class="form-label">Email</label>
-                                    <input type="email" value="{{ Auth::check() ? Auth::user()->email : '' }}" class="form-control" id="email" required>
+                                    <label for="email" class="form-label">Email</label>
+                                    <input type="email" value="{{ Auth::check() ? Auth::user()->email : '' }}"
+                                        class="form-control" name="email" id="email" required>
                                 </div>
                             </div>
                             <div class="mb-3">
-                                <label for="contactSubject" class="form-label">{{__('front_end.contact.topic')}}</label>
-                                <input type="text" class="form-control" id="subject"
-                                    value="<?php echo $subject_val; ?>" required>
+                                <label for="subject" class="form-label">{{__('front_end.contact.topic')}}</label>
+                                <input type="text" class="form-control" name="subject" id="subject" required>
                             </div>
                             <div class="mb-3">
-                                <label for="contactMessage" class="form-label">{{__('front_end.contact.message')}}</label>
-                                <textarea class="form-control" id="message" rows="5" required></textarea>
+                                <label for="message" class="form-label">{{__('front_end.contact.message')}}</label>
+                                <textarea class="form-control" name="message" id="message" rows="5" required></textarea>
                             </div>
-                            <button type="submit" class="btn btn-green btn-lg px-4">{{__('front_end.contact.message_button')}}</button>
+                            <button type="submit"
+                                class="btn btn-green btn-lg px-4">{{__('front_end.contact.message_button')}}
+                            </button>
                         </form>
                     </div>
                 </div>

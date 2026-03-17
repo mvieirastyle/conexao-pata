@@ -47,7 +47,7 @@ Route::get('/relevance', [RelevanceController::class, 'show']);
 
 Route::get('/contact', [ContactController::class, 'show']);
 
-Route::post('/contact', [ContactController::class, 'send']);
+Route::post('/contact', [ContactController::class, 'sendContactForm']);
 
 Route::get('/login', [AuthController::class, 'showLogin']);
 
