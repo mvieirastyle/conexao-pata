@@ -31,8 +31,6 @@
         </span>
     </div>
 
-    <h3 class="mb-4">{{__('blog.index.recent_post')}}</h3>
-
     <div class="row g-4">
         @foreach($posts as $post)
         <div class="col-md-6">

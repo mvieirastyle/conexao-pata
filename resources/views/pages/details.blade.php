@@ -2,6 +2,23 @@
 
 @section('content')
 <div class="container py-5">
+
+    @if (session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-triangle me-2"></i>
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
+    @if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle me-2"></i>
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+    
     <!-- Back Button & Title -->
     <div class="row align-items-center mb-5">
         <div class="col-md-3">
@@ -71,7 +88,7 @@
 
                 <!-- Action Button -->
                 <div>
-                    <a href="/contact"
+                    <a href="/form-adoption/{{ $animal->id }}"
                         class="btn btn-orange btn-lg rounded-pill px-5 fw-bold shadow-sm w-100">
                         {{__('front_end.details.adopt_button')}}
                     </a>

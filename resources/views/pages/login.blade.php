@@ -47,7 +47,7 @@
                                             {{__('common.remember')}}
                                         </label>
                                     </div>
-                                    <a href="#" class="small text-success text-decoration-none">{{__('common.forgot')}}</a>
+                                    <a href="/forgot-password" class="small text-success text-decoration-none">{{__('common.forgot')}}</a>
                                 </div>
                                 <div class="d-grid">
                                     <button type="submit" class="btn btn-success btn-lg">{{__('common.enter')}}</button>

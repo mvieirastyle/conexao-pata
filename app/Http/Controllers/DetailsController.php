@@ -24,7 +24,7 @@ class DetailsController extends Controller
 
         $path = $request->file('image')->store('images','public');
         
-        $fotos = Fotos::create(['path'=> $path, 'foto_model_type'=> Animal::class, 'foto_model_id'=> $id]);
+        Fotos::create(['path'=> $path, 'foto_model_type'=> Animal::class, 'foto_model_id'=> $id]);
         
         return redirect('/animal/' . $id);
     }

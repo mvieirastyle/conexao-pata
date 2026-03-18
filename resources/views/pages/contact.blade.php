@@ -108,7 +108,7 @@
             <div class="col-12">
                 <div class="rounded overflow-hidden shadow-sm">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!4v1765966150509!6m8!1m7!1sH-DqlEaMf4UB7DC2kveqcw!2m2!1d39.65381560946641!2d-8.815888337049582!3f316.4919631772255!4f-13.93150059145529!5f0.7820865974627469"
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3071.8431813445204!2d-8.818918925216416!3d39.653243671572696!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd22755dbaf6e5cb%3A0x8b20ce8aae97e0c6!2sR.%20Cabe%C3%A7o%20da%20Freiria%2C%20Batalha!5e0!3m2!1spt-PT!2spt!4v1773757348436!5m2!1spt-PT!2spt"
                         width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
                         referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
@@ -116,5 +116,4 @@
         </div>
     </div>
 </section>
-
 @endsection

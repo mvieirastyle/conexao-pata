@@ -2,15 +2,15 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\CanResetPassword;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -81,12 +81,14 @@ class User extends Authenticatable
             ]);
         }
 
+        $user->sendEmailVerificationNotification();
+        
         return $user;
     }
     public static function createNew(array $data = [])
     {
 
-        return self::create([
+        $user = self::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'first_name' => $data['first_name'],
@@ -94,6 +96,10 @@ class User extends Authenticatable
             'password' => Hash::make($data['password']),
             'role' => 'User',
         ]);
+
+        $user->sendEmailVerificationNotification();
+
+        return $user;
     }
 
     public static function deleteUser($id)

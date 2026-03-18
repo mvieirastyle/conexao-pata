@@ -18,9 +18,11 @@ use App\Exports\AdoptionsChartExport;
 use App\Exports\MicrochipsChartExport;
 use App\Exports\EntradasChartExport;
 use App\Http\Controllers\FormsController;
+use Illuminate\Container\Attributes\Auth;
 use Maatwebsite\Excel\Facades\Excel;
-
-
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth as FacadesAuth;
 
 Route::get('/', [HomeController::class, 'show']);
 
@@ -31,6 +33,10 @@ Route::get('/gallery', [GalleryController::class, 'show']);
 Route::get('/animal/{id}', [DetailsController::class, 'show']);
 
 Route::post('/animal/{id}/store', [DetailsController::class, 'store']);
+
+Route::get('/form-adoption/{id}', [FormsController::class, 'showAdoptionForm']);
+
+Route::post('/form-adoption/{id}', [FormsController::class, 'sendAdoptionForm']);
 
 Route::get('/donate', function () {return view('pages.donate');});
 
@@ -50,17 +56,40 @@ Route::get('/contact', [ContactController::class, 'show']);
 
 Route::post('/contact', [ContactController::class, 'sendContactForm']);
 
-Route::get('/login', [AuthController::class, 'showLogin']);
-
 Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::get('/register', [AuthController::class, 'showRegister']);
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLogin']);
+    Route::get('/register', [AuthController::class, 'showRegister']);
+});
 
 Route::post('/register', [AuthController::class, 'register']);
 
 Route::get('/profile', [UserController::class, 'showProfile']);
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect('/');
+})->middleware(['auth', 'signed'])->name('verification.verify');;
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', 'Verification link sent!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+Route::get('/forgot-password', [AuthController::class, 'showForgotPassword']);
+
+Route::post('/forgot-password', [AuthController::class, 'sendResetLink']);
+
+Route::get('/reset-password/{token}', [AuthController::class, 'showResetPassword'])->name('password.reset');
+
+Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 
 Route::post('/profile/edit/{id}', [UserController::class, 'update']);
 
