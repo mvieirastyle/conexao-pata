@@ -11,35 +11,49 @@ use App\Exports\AnimalsExport;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Cache;
 
 class AnimalController extends Controller
 {
+    private function getAnimalsCacheKey()
+    {
+        $filters = request()->only(['animal', 'sex', 'age', 'size', 'disponivel']);
+        $page = request('page', 1);
+
+        $version = Cache::get('animals_cache_version', 1);
+
+        return 'animals_' . $version . '_' . md5(json_encode($filters) . '_page_' . $page);
+    }
+
 
     public function show()
     {
-        $query = Animal::query();
+        $animals =  Cache::remember($this->getAnimalsCacheKey(), now()->addHours(3), function () {
 
-        if (request('animal')) {
-            $query->where('category_id', request('animal'));
-        }
+            $query = Animal::query();
 
-        if (request('sex')) {
-            $query->where('sexo', request('sex'));
-        }
+            if (request('animal')) {
+                $query->where('category_id', request('animal'));
+            }
 
-        if (request('age')) {
-            $query->where('idade', request('age'));
-        }
+            if (request('sex')) {
+                $query->where('sexo', request('sex'));
+            }
 
-        if (request('size')) {
-            $query->where('porte', request('size'));
-        }
+            if (request('age')) {
+                $query->where('idade', request('age'));
+            }
 
-        if (request('disponivel')) {
-            $query->where('disponivel', request('disponivel'));
-        }
+            if (request('size')) {
+                $query->where('porte', request('size'));
+            }
 
-        $animals = $query->paginate(6)->withQueryString();
+            if (request('disponivel')) {
+                $query->where('disponivel', request('disponivel'));
+            }
+
+            return $query->paginate(6)->withQueryString();
+        });
 
         return view('pages.admin.animal.list', [
             'animals' => $animals,
@@ -48,17 +62,12 @@ class AnimalController extends Controller
 
     public function showAdd()
     {
-        $animals = Animal::with(['vacinas', 'category', 'fotos']);
         $categories = Category::all();
         $vacinas = Vacina::all();
-        $fotos = Fotos::all();
 
-        $animals = Animal::all();
         return view('pages.admin.animal.add', [
-            'animals' => $animals,
             'categories' => $categories,
             'vacinas' => $vacinas,
-            'fotos' => $fotos,
         ]);
     }
 
@@ -67,6 +76,8 @@ class AnimalController extends Controller
         $request->validated();
 
         Animal::createNew($request->all());
+
+        Cache::increment('animals_cache_version');
 
         return redirect('/admin/animal/list')->with('success', 'Animal adicionado com sucesso');
     }
@@ -95,12 +106,16 @@ class AnimalController extends Controller
 
         Animal::updateAnimal($id, $request->all());
 
+        Cache::increment('animals_cache_version');
+
         return redirect('/admin/animal/list')->with('success', 'Animal editado com sucesso');
     }
 
     public function delete($id)
     {
         Animal::deleteAnimal($id);
+
+        Cache::increment('animals_cache_version');
 
         return redirect('/admin/animal/list')->with('success', 'Animal removido com sucesso');
     }
@@ -274,7 +289,7 @@ class AnimalController extends Controller
         return $pdf->download('relatorio-entradas-grafico.pdf');
     }
 
-     public function generatePdfAdoptionsChart($inicialDate = null, $lastDate = null)
+    public function generatePdfAdoptionsChart($inicialDate = null, $lastDate = null)
     {
         $rows = [];
 

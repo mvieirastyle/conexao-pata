@@ -4,8 +4,12 @@ return [
     
     'header' => [
         'home' => 'Home',
+        'about_one'=> 'About',
         'about' => 'OASB',
         'adopt' => 'Adopt',
+        'help'=> 'Help',
+        'donate' => 'Donate',
+        'volunteer' => 'Volunteer',
         'relevance' => 'Relevance',
         'contact' => 'Contact',
         'hello' => 'Hello',
@@ -90,6 +94,9 @@ return [
 
         'see_details' => 'See Details',
 
+        'availability' => 'Availability',
+        'available' => 'Available',
+        'unavailable' => 'Unavailable',
     ],
 
         'details' => [

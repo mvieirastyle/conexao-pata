@@ -5,6 +5,7 @@ return[
     'registered_users' => 'Registered Users',
     'confirmed' => 'Are you sure you want to get rid of this user?',
     'add_user' => 'Add User',
+    'filter_type'=> 'User type',
 
      'columns' => [
         'picture' => 'Picture',

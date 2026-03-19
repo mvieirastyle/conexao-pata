@@ -30,15 +30,15 @@
 
             <select class="form-select bg-light text-dark" name="admin">
                 <option value="" disabled {{ request('admin')===null ? 'selected' : '' }}>
-                    Tipo de Utilizador
+                    {{__('users.filter_type')}}
                 </option>
 
                 <option value="1" {{ request('admin')=='1' ? 'selected' : '' }}>
-                    Administrador
+                     {{__('users.lines.admin')}}
                 </option>
 
                 <option value="0" {{ request('admin')=='0' ? 'selected' : '' }}>
-                    Utilizador
+                    {{__('users.lines.user')}}
                 </option>
             </select>
 

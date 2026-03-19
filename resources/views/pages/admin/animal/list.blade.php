@@ -69,15 +69,15 @@
 
             <select class="form-select bg-light text-dark" name="disponivel">
                 <option value="" disabled {{ request('disponivel')===null ? 'selected' : '' }}>
-                    Disponibilidade
+                    {{__('front_end.gallery.availability')}}
                 </option>
 
                 <option value="1" {{ request('disponivel')=='1' ? 'selected' : '' }}>
-                    Disponivel
+                    {{__('front_end.gallery.available')}}
                 </option>
 
                 <option value="0" {{ request('disponivel')=='0' ? 'selected' : '' }}>
-                    Indisponivel
+                    {{__('front_end.gallery.unavailable')}}
                 </option>
             </select>
 

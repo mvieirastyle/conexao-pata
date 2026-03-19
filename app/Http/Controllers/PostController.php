@@ -8,22 +8,36 @@ use App\Models\User;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class PostController extends Controller
 {
-    public function show(): View
+    private function getPostCacheKey($id)
     {
-        $user = User::class;
-        $query = Post::query();
-        $posts = $query->paginate(2)->withQueryString();
-        return view('pages.blog.index', [
-            'posts' => $posts,
-            'user' => $user,
-        ]);
+        return 'post_' . $id;
+    }
+    private function getPostsCacheKey()
+    {
+        $page = request('page', 1);
+
+        $version = Cache::get('posts_cache_version', 1);
+
+        return 'posts_' . $version . '_page_' . $page;
     }
 
+    public function show(): View
+    {
+        $posts = Cache::remember($this->getPostsCacheKey(), now()->addHours(3), function () {
+            return Post::query()->paginate(6)->withQueryString();
+        });
+
+        return view('pages.blog.index', [
+            'posts' => $posts,
+            'user' => Auth::user(),
+        ]);
+    }
     public function showAdd(): View
     {
         return view('pages.blog.new_post');
@@ -31,21 +45,30 @@ class PostController extends Controller
 
     public function showPost(int $id)
     {
-        $comments = Comment::where('post_id', $id)->latest()->get();
-        $post = Post::find($id);
+        $data = Cache::remember($this->getPostCacheKey($id), now()->addHours(3), function () use ($id) {
 
-        $url = url('/blog/post/' . $post->id);
+            $post = Post::findOrFail($id);
+
+            $comments = Comment::where('post_id', $id)
+                ->latest()
+                ->get();
+
+            return [
+                'post' => $post,
+                'comments' => $comments,
+            ];
+        });
+
+        $url = url('/blog/post/' . $data['post']->id);
 
         $shareLinks = Share::page(
             $url,
-            $post->title
+            $data['post']->title
         )->facebook()->twitter()->whatsapp();
 
-
-
         return view('pages.blog.post', [
-            'post' => $post,
-            'comments' => $comments,
+            'post' => $data['post'],
+            'comments' => $data['comments'],
             'shareLinks' => $shareLinks,
         ]);
     }
@@ -59,6 +82,8 @@ class PostController extends Controller
         ]);
 
         Post::createNew($request->all(), $id);
+
+        Cache::increment('posts_cache_version');
 
         return redirect('/blog');
     }
@@ -81,12 +106,14 @@ class PostController extends Controller
     {
         Post::deletePost($id);
 
+        Cache::increment('posts_cache_version');
+
         return redirect('/blog');
     }
 
     public function showEdit(int $postId)
     {
-        $post = Post::all()->find($postId);
+        $post = Post::findOrFail($postId);
         return view('pages.blog.edit', [
             'post' => $post,
         ]);
@@ -101,6 +128,8 @@ class PostController extends Controller
         ]);
 
         Post::updatePost($id, $request->all());
+
+        Cache::increment('posts_cache_version');
 
         return redirect('/blog')->with('success', 'Sua publicação foi editada com sucesso');
     }

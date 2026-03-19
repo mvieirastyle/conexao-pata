@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Animal;
-use App\Models\Form_fat;
-use App\Models\Form_volunteer;
+use App\Models\FormFat;
+use App\Models\FormVolunteer;
 use App\Models\FormAdoption;
 use Illuminate\Http\Request;
 
@@ -44,7 +44,7 @@ class FormsController extends Controller
             'adaptation_terms' => 'accepted'
         ]);
 
-        Form_volunteer::createNew($data);
+        FormVolunteer::createNew($data);
 
         return redirect('/volunteer')->with('success', 'Formulário de voluntariado enviado com sucesso!');
     }
@@ -70,7 +70,7 @@ public function sendFatForm(Request $request)
         'adaptation_terms' => 'accepted'
     ]);
 
-    Form_fat::createNew($data);
+    FormFat::createNew($data);
 
     return redirect('/volunteer')->with('success', 'Formulário de FAT enviado com sucesso!');
 }
@@ -79,7 +79,7 @@ public function showAdoptionForm(int $id)
 {
     $animal = Animal::findOrFail($id);
 
-    return view('pages.formAdoption', [
+    return view('pages.form-adoption', [
         'animal' => $animal
     ]);
 }

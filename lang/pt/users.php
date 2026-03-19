@@ -5,6 +5,7 @@ return[
     'registered_users' => 'Utilizadores Registados',
     'confirmed' => 'Tem certeza que deseja eliminar este utilizador?',
     'add_user' => 'Adicionar Utilizador',
+    'filter_type'=> 'Tipo de Utilizador',
 
      'columns' => [
         'picture' => 'Foto',

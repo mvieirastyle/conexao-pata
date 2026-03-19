@@ -16,7 +16,7 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Sobre
+                        {{__('front_end.header.about_one')}}
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/about">{{__('front_end.header.about')}}</a></li>
@@ -29,11 +29,11 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Ajudar
+                        {{__('front_end.header.help')}}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/donate">Doar</a></li>
-                        <li><a class="dropdown-item" href="/volunteer">Voluntariado</a></li>
+                        <li><a class="dropdown-item" href="/donate">{{__('front_end.header.donate')}}</a></li>
+                        <li><a class="dropdown-item" href="/volunteer">{{__('front_end.header.volunteer')}}</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

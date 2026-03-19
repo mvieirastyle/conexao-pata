@@ -1,4 +1,4 @@
-@extends('layouts.default')
+﻿@extends('layouts.default')
 
 @section('content')
 
@@ -10,7 +10,7 @@
 
                     <div class="card-header bg-success text-white text-center py-4">
                         <h3 class="mb-0 fw-bold">
-                            <i class="fas fa-lock me-2"></i>Reset Password
+                            <i class="fas fa-lock me-2"></i>{{ __('pass.reset_title') }}
                         </h3>
                     </div>
 
@@ -30,7 +30,7 @@
 
                             {{-- EMAIL --}}
                             <div class="mb-3">
-                                <label for="email" class="form-label">Email</label>
+                                <label for="email" class="form-label">{{ __('pass.email_label') }}</label>
                                 <div class="input-group">
                                     <span class="input-group-text">
                                         <i class="fas fa-envelope"></i>
@@ -48,7 +48,7 @@
 
                             {{-- PASSWORD --}}
                             <div class="mb-3">
-                                <label for="password" class="form-label">Nova Password</label>
+                                <label for="password" class="form-label">{{ __('pass.new_password_label') }}</label>
                                 <div class="input-group">
                                     <span class="input-group-text">
                                         <i class="fas fa-lock"></i>
@@ -65,7 +65,7 @@
 
                             {{-- CONFIRM PASSWORD --}}
                             <div class="mb-4">
-                                <label for="password_confirmation" class="form-label">Confirmar Password</label>
+                                <label for="password_confirmation" class="form-label">{{ __('pass.confirm_password_label') }}</label>
                                 <div class="input-group">
                                     <span class="input-group-text">
                                         <i class="fas fa-check"></i>
@@ -79,13 +79,13 @@
 
                             <div class="d-grid mb-3">
                                 <button type="submit" class="btn btn-success btn-lg text-white">
-                                    <i class="fas fa-save me-2"></i>Redefinir Password
+                                    <i class="fas fa-save me-2"></i>{{ __('pass.reset_button') }}
                                 </button>
                             </div>
 
                             <div class="text-center">
                                 <a href="/login" class="small text-decoration-none text-success">
-                                    <i class="fas fa-arrow-left me-1"></i>Voltar ao Login
+                                    <i class="fas fa-arrow-left me-1"></i>{{ __('pass.back_to_login') }}
                                 </a>
                             </div>
 
@@ -93,7 +93,7 @@
                     </div>
 
                     <div class="card-footer text-center py-3 bg-light">
-                        <p class="mb-0 small">Lembra-te da password? <a href="/login" class="text-success">Login</a></p>
+                        <p class="mb-0 small">{{ __('pass.remember_password') }} <a href="/login" class="text-success">{{ __('pass.login') }}</a></p>
                     </div>
 
                 </div>

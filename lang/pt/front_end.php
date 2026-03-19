@@ -4,8 +4,12 @@ return [
 
       'header' => [
         'home' => 'Início',
+        'about_one' => 'Sobre',
         'about' => 'CROACB',
         'adopt' => 'Adoção',
+        'help' => 'Ajuda',
+        'donate' => 'Doar',
+        'volunteer' => 'Voluntariado',
         'relevance' => 'Relevância',
         'contact' => 'Contactos',
         'hello' => 'Olá',
@@ -88,6 +92,10 @@ return [
         'large' => 'Grande',
 
         'see_details' => 'Ver Detalhes',
+
+        'availability' => 'Disponibilidade',
+        'available' => 'Disponível',
+        'unavailable' => 'Indisponível',
     ],
 
     'details' => [

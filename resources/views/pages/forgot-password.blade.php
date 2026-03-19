@@ -1,4 +1,4 @@
-@extends('layouts.default')
+﻿@extends('layouts.default')
 
 @section('content')
 
@@ -10,7 +10,7 @@
 
                     <div class="card-header bg-success text-white text-center py-4">
                         <h3 class="mb-0 fw-bold">
-                            <i class="fas fa-key me-2"></i>Forgot Password
+                            <i class="fas fa-key me-2"></i>{{ __('pass.title') }}
                         </h3>
                     </div>
 
@@ -26,34 +26,34 @@
                             @csrf
 
                             <div class="mb-4">
-                                <label for="email" class="form-label">Email</label>
+                                <label for="email" class="form-label">{{ __('pass.email_label') }}</label>
                                 <div class="input-group">
                                     <span class="input-group-text">
                                         <i class="fas fa-envelope"></i>
                                     </span>
                                     <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                        id="email" name="email" placeholder="admin@batalha.pt"
+                                        id="email" name="email" placeholder="{{ __('pass.email_placeholder') }}"
                                         value="{{ old('email') }}" required>
                                     @error('email')
                                     <div class="invalid-feedback">
-                                        {{ $message }}
+                                        {{  }}
                                     </div>
                                     @enderror
                                 </div>
                                 <small class="text-muted">
-                                    Escreva o email associado à tua conta e enviaremos um link para redefinir a tua password.
+                                    {{ __('pass.help_text') }}
                                 </small>
                             </div>
 
                             <div class="d-grid mb-3">
                                 <button type="submit" class="btn btn-success btn-lg text-white">
-                                    <i class="fas fa-paper-plane me-2"></i>Enviar Link
+                                    <i class="fas fa-paper-plane me-2"></i>{{ __('pass.send_button') }}
                                 </button>
                             </div>
 
                             <div class="text-center">
                                 <a href="/login" class="small text-decoration-none text-success">
-                                    <i class="fas fa-arrow-left me-1"></i>Voltar ao Login
+                                    <i class="fas fa-arrow-left me-1"></i>{{ __('pass.back_to_login') }}
                                 </a>
                             </div>
 

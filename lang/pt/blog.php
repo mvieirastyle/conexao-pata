@@ -3,7 +3,7 @@
 return [
 
     "index" => [
-        'text_blog' => 'Partilhe e descubra mais sobre os nossos aumigos',
+        'text_blog' => 'Partilhe e descubra mais sobre os nossos amigos',
         'create_post' => 'Criar Post',
         'alert_login' => 'Para fazer um post é necessario <a href="/login">efetuar login</a>.',
         'all_posts' => 'Todos os posts',

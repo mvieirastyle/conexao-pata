@@ -1,0 +1,112 @@
+﻿<?php
+
+return [
+    'page_title' => 'Voluntariado',
+    'page_lead' => 'Ajude nos a dar a estes animais uma segunda oportunidade',
+    'section_title' => 'Voluntariado',
+    'intro_1' => 'O voluntariado é a força vital que impulsiona o nosso trabalho no canil e gatil municipal. São os nossos voluntários que, com dedicação e amor, transformam a vida dos cães e gatos que acolhemos, proporcionando-lhes cuidado, atenção e carinho em cada momento.',
+    'intro_2' => 'Os nossos voluntários desempenham um papel fundamental em diversas áreas, desde a alimentação e cuidados diários dos animais, até à organização de eventos de adoção, campanhas de sensibilização e angariação de fundos. Cada gesto, por mais pequeno que seja, tem um impacto enorme na vida dos nossos amigos de quatro patas.',
+    'intro_3' => 'Se tem um coração cheio de amor pelos animais e deseja fazer a diferença, junte-se a nós como voluntário. O seu tempo e dedicação serão recompensados com a alegria de ver um animal que antes estava sozinho e desamparado, florescer sob os seus cuidados e encontrar um lar cheio de amor.',
+    'become_volunteer_title' => 'Como se tornar um voluntário',
+    'become_volunteer_para' => 'Tornar-se um voluntário é simples e gratificante. Basta entrar em contacto connosco através do nosso formulário de contacto ou visitar-nos pessoalmente para saber mais sobre as oportunidades de voluntariado disponíveis. Estamos sempre à procura de pessoas apaixonadas e dedicadas para se juntarem à nossa equipa e fazerem a diferença na vida dos nossos animais.',
+    'volunteer_cta' => 'Para se voluntariar, preencha o nosso formulário de inscrição ou contacte-nos através do nosso email ou telefone.',
+    'volunteer_button' => 'Formulario de voluntariado',
+    'foster_title' => 'Como se tornar uma FAT (Família de Acolhimento Temporário)',
+    'foster_para_1' => 'Se não pode adotar um animal de forma permanente, pode ainda assim mudar uma vida. O acolhimento temporário é, muitas vezes, a diferença entre um animal continuar preso num canil ou ter finalmente a oportunidade de recuperar, ganhar confiança e encontrar uma família definitiva.',
+    'foster_para_2' => 'Ao abrir temporariamente as portas da sua casa, está a oferecer algo que nenhum abrigo consegue substituir: atenção, estabilidade e carinho. Esse tempo pode ser fundamental para que o animal recupere física e emocionalmente e tenha uma verdadeira segunda oportunidade.',
+    'foster_para_3' => 'Registar-se na nossa base de dados não implica qualquer compromisso permanente. Encaramos a inscrição apenas como uma demonstração de disponibilidade para ajudar quando for possível. Quando surgir um caso compatível consigo, entraremos em contacto — e poderá decidir se pode acolher nesse momento.',
+    'foster_para_4' => 'Ser uma FAT (Família de Acolhimento Temporário) é um gesto simples que pode ter um impacto enorme na vida de um animal. Se tem um pouco de espaço, tempo e vontade de ajudar, pode ser exatamente a pessoa que fará a diferença.',
+    'foster_cta' => 'Para se voluntariar, preencha o nosso formulário de inscrição ou contacte-nos através do nosso email ou telefone.',
+    'foster_button' => 'Formulario FAT',
+    'image_alt' => 'Paisagem da Batalha',
+
+    // Form Volunteer
+    'form_title' => 'Juntar-se ao voluntariado',
+    'section_personal_data' => 'Dados Pessoais',
+    'label_full_name' => 'Nome Completo *',
+    'label_email' => 'E-mail *',
+    'label_birth_date' => 'Data de Nascimento *',
+    'label_nationality' => 'Nacionalidade *',
+    'label_id_number' => 'Número do Documento de Identificação *',
+    'label_phone' => 'Número de Telemóvel *',
+    'label_address' => 'Morada *',
+    'label_occupation' => 'Ocupação *',
+    'label_company_school' => 'Empresa / Escola / Faculdade',
+    'label_hobbies' => 'Hobbies *',
+
+    'section_animals' => 'Animais',
+    'label_have_animals' => 'Tem animais? Quais?',
+    'animal_dog' => 'Cão',
+    'animal_cat' => 'Gato',
+    'animal_other' => 'Outro',
+    'animal_none' => 'Não tenho nenhum animal',
+
+    'section_transport' => 'Transporte',
+    'label_transport' => 'Meio de transporte para o Abrigo',
+    'transport_car' => 'Viatura Própria',
+    'transport_public' => 'Transportes Públicos',
+    'transport_ride' => 'Boleia',
+    'transport_walk' => 'A pé',
+
+    'section_area' => 'Área de Voluntariado',
+    'label_area' => 'Onde pretende realizar voluntariado?',
+    'area_kennel' => 'Canil',
+    'area_cattery' => 'Gatil',
+
+    'section_availability' => 'Disponibilidade',
+    'activity_campaigns' => 'Campanhas de Recolha de Bens',
+    'activity_fairs' => 'Feiras de Voluntariado',
+    'activity_awareness' => 'Ações de Sensibilização',
+    'activity_transport_animals' => 'Transporte de Animais',
+    'activity_admin_tasks' => 'Tarefas Administrativas',
+
+    'section_courses' => 'Cursos relacionados com animais',
+    'course_trainer' => 'Treinador',
+    'course_vet_assistant' => 'Auxiliar de Veterinária',
+    'course_vet' => 'Médico Veterinário',
+    'course_other' => 'Outro',
+
+    'section_terms' => 'Termos',
+    'term_accident_responsibility' => 'Declaro assumir a responsabilidade por qualquer acidente que possa ocorrer no Abrigo',
+    'term_adaptation' => 'Declaro ter autonomia na realização de tarefas e não ter necessidades específicas de adaptação',
+
+    'submit_button' => 'Enviar candidatura',
+
+    'modal_title' => 'Pontos importantes a considerar antes de prosseguir',
+    'modal_requirements_title' => 'Requisitos para Voluntariado',
+    'modal_req_1' => 'É necessário compromisso e assiduidade: mínimo <strong>3 horas seguidas, 1 vez por semana</strong>.',
+    'modal_req_2' => 'Voluntários <strong>sem experiência</strong> participam <strong>durante a tarde</strong> (manhã reservada para experientes).',
+    'modal_req_3' => '<strong>Canil:</strong> maiores de <strong>18 anos</strong>.',
+    'modal_req_4' => '<strong>Gatil:</strong> maiores de <strong>16 anos</strong>, com <strong>termo de responsabilidade assinado por um tutor</strong>.',
+    'modal_req_5' => 'Inscrições de pessoas com <strong>necessidades específicas/adaptações</strong> devem ser previamente alinhadas pelo email <a href="mailto:admin@batalha.pt">admin@batalha.pt</a>.',
+
+    'modal_tasks_title' => 'Tarefas do Voluntário',
+    'modal_task_1' => 'Limpar <strong>boxes e gatis</strong>.',
+    'modal_task_2' => '<strong>Soltar os cães</strong> no recreio.',
+    'modal_task_3' => 'Verificar <strong>camas, mantas e água</strong>.',
+    'modal_task_4' => '<strong>Apanhar dejetos</strong> nas boxes/gatis e no recreio.',
+    'modal_task_5' => '<strong>Lavar, estender, apanhar e guardar mantas</strong>.',
+    'modal_task_6' => '<strong>Levar mantas sujas</strong> para lavagem. <strong>Comunicar situações relevantes</strong> à Direção ou aos Médicos Veterinários.',
+
+    // FAT (Família de Acolhimento Temporário)
+    'fat_title' => 'Ser uma FAT (Família de Acolhimento Temporário)',
+    'label_fat_experience' => 'Experiência como FAT (se houver):',
+    'label_availability' => 'Posso ser FAT de:',
+    'availability_dog_mother_and_pups' => 'Mãe e ninhada (cães)',
+    'availability_dog_puppies' => 'Cães bebés',
+    'availability_dog_adults' => 'Cães adultos',
+    'availability_cat_mother_and_pups' => 'Mãe e ninhada (gatos)',
+    'availability_cat_kittens' => 'Gatos bebés',
+    'availability_cat_adults' => 'Gatos adultos',
+    'availability_sick_dogs' => 'Cães doentes',
+    'availability_sick_cats' => 'Gatos doentes',
+
+    'section_residence' => 'Residência',
+    'label_residence_type' => 'Tipo de Residência',
+    'residence_apartment' => 'Apartamento',
+    'residence_house' => 'Casa',
+    'residence_farm' => 'Quinta',
+];
+
+?>
+

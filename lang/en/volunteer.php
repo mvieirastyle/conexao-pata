@@ -1,0 +1,112 @@
+﻿<?php
+
+return [
+    'page_title' => 'Volunteering',
+    'page_lead' => 'Help us give these animals a second chance',
+    'section_title' => 'Volunteering',
+    'intro_1' => 'Volunteering is the lifeblood that drives our work at the municipal shelter. It is our volunteers who, with dedication and love, transform the lives of the dogs and cats we take in, providing care, attention, and affection at every moment.',
+    'intro_2' => 'Our volunteers play a key role in many areas, from feeding and daily care of the animals, to organizing adoption events, awareness campaigns, and fundraising. Every gesture, no matter how small, has a huge impact on the lives of our four-legged friends.',
+    'intro_3' => 'If you have a heart full of love for animals and want to make a difference, join us as a volunteer. Your time and dedication will be rewarded with the joy of seeing an animal that was once alone and helpless thrive under your care and find a loving home.',
+    'become_volunteer_title' => 'How to become a volunteer',
+    'become_volunteer_para' => 'Becoming a volunteer is simple and rewarding. Just contact us through our contact form or visit us in person to learn more about available volunteering opportunities. We are always looking for passionate and dedicated people to join our team and make a difference in the lives of our animals.',
+    'volunteer_cta' => 'To volunteer, fill out our registration form or contact us via our email or phone.',
+    'volunteer_button' => 'Volunteer form',
+    'foster_title' => 'How to become a FAT (Temporary Foster Family)',
+    'foster_para_1' => 'If you cannot adopt an animal permanently, you can still change a life. Temporary fostering is often the difference between an animal remaining confined in a shelter or finally having the chance to recover, gain confidence, and find a permanent family.',
+    'foster_para_2' => 'By temporarily opening your home, you are offering something no shelter can replace: attention, stability, and affection. That time can be crucial for the animal\'s physical and emotional recovery and a true second chance.',
+    'foster_para_3' => 'Registering in our database does not imply any permanent commitment. We view the registration only as a demonstration of availability to help when possible. When a case compatible with you arises, we will get in touch — and you can decide if you can foster at that time.',
+    'foster_para_4' => 'Being a FAT (Temporary Foster Family) is a simple gesture that can have a huge impact on an animal\'s life. If you have a bit of space, time, and willingness to help, you may be exactly the person who makes the difference.',
+    'foster_cta' => 'To volunteer, fill out our registration form or contact us via our email or phone.',
+    'foster_button' => 'FAT form',
+    'image_alt' => 'Batalha landscape',
+
+    // Form Volunteer
+    'form_title' => 'Join Volunteering',
+    'section_personal_data' => 'Personal Information',
+    'label_full_name' => 'Full Name *',
+    'label_email' => 'Email *',
+    'label_birth_date' => 'Date of Birth *',
+    'label_nationality' => 'Nationality *',
+    'label_id_number' => 'ID Number *',
+    'label_phone' => 'Phone Number *',
+    'label_address' => 'Address *',
+    'label_occupation' => 'Occupation *',
+    'label_company_school' => 'Company / School / University',
+    'label_hobbies' => 'Hobbies *',
+
+    'section_animals' => 'Animals',
+    'label_have_animals' => 'Do you have animals? Which ones?',
+    'animal_dog' => 'Dog',
+    'animal_cat' => 'Cat',
+    'animal_other' => 'Other',
+    'animal_none' => 'I do not have any animals',
+
+    'section_transport' => 'Transport',
+    'label_transport' => 'Means of transport to the Shelter',
+    'transport_car' => 'Private car',
+    'transport_public' => 'Public transport',
+    'transport_ride' => 'Ride',
+    'transport_walk' => 'Walk',
+
+    'section_area' => 'Volunteering Area',
+    'label_area' => 'Where would you like to volunteer?',
+    'area_kennel' => 'Kennel',
+    'area_cattery' => 'Cattery',
+
+    'section_availability' => 'Availability',
+    'activity_campaigns' => 'Goods Collection Campaigns',
+    'activity_fairs' => 'Volunteering Fairs',
+    'activity_awareness' => 'Awareness Campaigns',
+    'activity_transport_animals' => 'Animal Transport',
+    'activity_admin_tasks' => 'Administrative Tasks',
+
+    'section_courses' => 'Animal-related Courses',
+    'course_trainer' => 'Trainer',
+    'course_vet_assistant' => 'Veterinary Assistant',
+    'course_vet' => 'Veterinarian',
+    'course_other' => 'Other',
+
+    'section_terms' => 'Terms',
+    'term_accident_responsibility' => 'I declare that I assume responsibility for any accident that may occur at the Shelter',
+    'term_adaptation' => 'I declare that I am autonomous in carrying out tasks and do not have specific adaptation needs',
+
+    'submit_button' => 'Submit application',
+
+    'modal_title' => 'Important points to consider before proceeding',
+    'modal_requirements_title' => 'Volunteer Requirements',
+    'modal_req_1' => 'Commitment and attendance are required: minimum <strong>3 consecutive hours, once per week</strong>.',
+    'modal_req_2' => 'Volunteers <strong>without experience</strong> participate <strong>in the afternoon</strong> (morning reserved for experienced volunteers).',
+    'modal_req_3' => '<strong>Kennel:</strong> 18 years or older.',
+    'modal_req_4' => '<strong>Cattery:</strong> 16 years or older, with a <strong>responsibility statement signed by a guardian</strong>.',
+    'modal_req_5' => 'Registrations of people with <strong>specific needs/adaptations</strong> must be previously aligned via email <a href="mailto:admin@batalha.pt">admin@batalha.pt</a>.',
+
+    'modal_tasks_title' => 'Volunteer Tasks',
+    'modal_task_1' => 'Clean <strong>boxes and catteries</strong>.',
+    'modal_task_2' => '<strong>Release the dogs</strong> into the recreation area.',
+    'modal_task_3' => 'Check <strong>beds, blankets and water</strong>.',
+    'modal_task_4' => '<strong>Pick up waste</strong> in the boxes/catteries and recreation area.',
+    'modal_task_5' => '<strong>Wash, hang, collect and store blankets</strong>.',
+    'modal_task_6' => '<strong>Take dirty blankets</strong> to be washed. <strong>Report relevant situations</strong> to Management or the Veterinarians.',
+
+    // FAT (Temporary Foster Family)
+    'fat_title' => 'Be a FAT (Temporary Foster Family)',
+    'label_fat_experience' => 'Experience as a FAT (if any):',
+    'label_availability' => 'I can foster:',
+    'availability_dog_mother_and_pups' => 'Mother and pups (dogs)',
+    'availability_dog_puppies' => 'Dog puppies',
+    'availability_dog_adults' => 'Adult dogs',
+    'availability_cat_mother_and_pups' => 'Mother and kittens (cats)',
+    'availability_cat_kittens' => 'Cat kittens',
+    'availability_cat_adults' => 'Adult cats',
+    'availability_sick_dogs' => 'Sick dogs',
+    'availability_sick_cats' => 'Sick cats',
+
+    'section_residence' => 'Residence',
+    'label_residence_type' => 'Type of residence',
+    'residence_apartment' => 'Apartment',
+    'residence_house' => 'House',
+    'residence_farm' => 'Farm',
+];
+
+?>
+

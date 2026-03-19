@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Form_volunteer extends Model
+class FormVolunteer extends Model
 {
     public $timestamps = false;
 

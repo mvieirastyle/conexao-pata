@@ -73,7 +73,7 @@ class AuthController extends Controller
 
     public function showForgotPassword()
     {
-        return view('pages.forgotPassword');
+        return view('pages.forgot-password');
     }
 
     public function sendResetLink(Request $request)
@@ -115,6 +115,7 @@ class AuthController extends Controller
 
     public function showResetPassword($token)
     {
-        return view('pages.resetPassword', ['token' => $token]);
+        return view('pages.reset-password', ['token' => $token]);
+    
     }
 }

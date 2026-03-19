@@ -8,40 +8,8 @@ use Illuminate\View\View;
 
 class GalleryController extends Controller
 {
-    public function show(): View
+    private function applyFilters($query, Request $request)
     {
-        $animals = Animal::with(['vacinas', 'category', 'fotos'])
-        ->where('disponivel', true);
-
-        $query = Animal::query();
-
-          if (request('animal')) {
-            $query->where('category_id', request('animal'));
-        }
-
-        if (request('sex')) {
-            $query->where('sexo', request('sex'));
-        }
-
-        if (request('age')) {
-            $query->where('idade', request('age'));
-        }
-
-        if (request('size')) {
-            $query->where('porte', request('size'));
-        }
-
-        $animals = $query->paginate(6)->withQueryString();
-
-        return view('pages.gallery', [
-            'animals' => $animals,
-        ]);
-    }
-
-    public function showFilter(Request $request): View
-    {
-        $query = Animal::query();
-
         if ($request->input('animal') && $request->input('animal') !== 'all') {
             $query->where('category_id', $request->input('animal'));
         }
@@ -58,6 +26,16 @@ class GalleryController extends Controller
             $query->where('porte', $request->input('size'));
         }
 
+        return $query;
+    }
+
+    public function show(Request $request): View
+    {
+        $query = Animal::with(['vacinas', 'category', 'fotos'])
+            ->where('disponivel', true);
+
+        $query = $this->applyFilters($query, $request);
+
         $animals = $query->paginate(6)->withQueryString();
 
         return view('pages.gallery', [
@@ -65,3 +43,4 @@ class GalleryController extends Controller
         ]);
     }
 }
+
