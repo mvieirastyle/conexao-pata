@@ -26,9 +26,8 @@ new class extends Component
 ?>
 
 <div>
-    <button wire:click="addLikes" type="button"
+    <button wire:click="addLikes" @guest disabled title="Precisas de estar logado" @endguest
         class="btn btn-sm {{ $post->isLikedByUser() ? 'btn-success' : '' }}">
-
         <i class="fas fa-thumbs-up"></i>
         {{ $post->likes->count() }}
     </button>

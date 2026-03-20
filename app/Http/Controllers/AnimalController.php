@@ -6,6 +6,7 @@ use App\Http\Requests\AnimalRequest;
 use App\Models\Animal;
 use App\Models\Category;
 use App\Models\Fotos;
+use App\Models\FormAdoption;
 use App\Models\Vacina;
 use App\Exports\AnimalsExport;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -57,6 +58,27 @@ class AnimalController extends Controller
 
         return view('pages.admin.animal.list', [
             'animals' => $animals,
+        ]);
+    }
+
+    public function showAdoptionRequests()
+    {
+        $formAdoptions = FormAdoption::with('animal')
+            ->latest()
+            ->paginate(10);
+
+        return view('pages.admin.animal.adoption-request', [
+            'formAdoptions' => $formAdoptions,
+        ]);
+    }
+
+    public function showAdoptionRequest($id)
+    {
+        $formAdoption = FormAdoption::with('animal')->findOrFail($id);
+
+        return view('pages.admin.animal.info-adoption', [
+            'formAdoption' => $formAdoption,
+            'animal' => $formAdoption->animal,
         ]);
     }
 

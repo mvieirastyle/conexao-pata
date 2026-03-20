@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Animal;
 
 class FormAdoption extends Model
 {
@@ -40,6 +41,12 @@ class FormAdoption extends Model
         'animals' => 'array',
         'residence_type' => 'array',
     ];
+
+    public function animal()
+    {
+        return $this->belongsTo(Animal::class);
+    }
+
     public static function createNew(array $data = [], int $animal_id)
     {
         return self::create([

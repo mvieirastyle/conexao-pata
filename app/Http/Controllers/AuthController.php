@@ -26,6 +26,15 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
+
+            if (Auth::user()->email_verified_at === null) {
+                Auth::logout();
+
+                return back()->withErrors([
+                    'email' => 'Precisa verificar o seu email antes de fazer login.',
+                ])->onlyInput('email');
+            }
+
             $request->session()->regenerate();
 
             if (Auth::user()->admin)
@@ -38,7 +47,6 @@ class AuthController extends Controller
             'email' => 'Email ou palavra-passe incorretos.',
         ])->onlyInput('email');
     }
-
     public function logout(Request $request)
     {
         Auth::logout();
@@ -60,8 +68,8 @@ class AuthController extends Controller
 
         $user = User::createNew($request->all());
 
-
-        Auth::login($user);
+        session(['user' => $user]);
+        //Auth::login($user);
 
 
         if (!$user->hasVerifiedEmail()) {
@@ -116,6 +124,5 @@ class AuthController extends Controller
     public function showResetPassword($token)
     {
         return view('pages.reset-password', ['token' => $token]);
-    
     }
 }

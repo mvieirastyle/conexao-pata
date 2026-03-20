@@ -30,7 +30,10 @@
                         <li><a class="dropdown-item" href="/admin/users/list">{{__('animal.users')}}</a></li>
                     </ul>
                 </li>
-
+    
+                <li class="nav-item">
+                    <a class="nav-link" href="/admin/animal/adoption-requests">Pedidos de Adoção</a>
+                </li>
 
                 @auth
                 @if (Auth::user()->admin)

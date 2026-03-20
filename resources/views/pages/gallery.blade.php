@@ -88,10 +88,19 @@
         @forelse($animals as $animal)
         <div class="col-md-6 col-lg-4 animal-card">
             <div class="card card-custom h-100">
-                <a href="/animal/{{ $animal->id }}" class="text-decoration-none text-dark">
-                    <img src="{{Storage::url($animal->fotos->first()?->path)}}" class="card-img-top"
-                        alt="{{ $animal->nome}}" style="height: 250px; object-fit: cover;">
-                </a>
+                <div class="img-container"
+                    style="height: 250px; display:flex; justify-content: center; align-items: center;">
+
+                    <a style="width: 100%; display:flex; justify-content: center; align-items: center;" href="/animal/{{ $animal->id }}" class="text-decoration-none text-dark">
+                        @if ($animal->fotos->isEmpty())
+                        <img src="{{Storage::url('images/paws.png')}}" class="card-img-top" alt="Imagem padrão"
+                            style="height: 200px; width: 200px; ">
+                        @else
+                        <img src="{{Storage::url($animal->fotos->first()?->path)}}" class="card-img-top"
+                            alt="{{ $animal->nome}}" style="height: 250px; object-fit: cover;">
+                        @endif
+                    </a>
+                </div>
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-2">
                         <a href="/animal/{{ $animal->id}}" class="text-decoration-none text-dark">

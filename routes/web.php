@@ -61,17 +61,17 @@ Route::get('/logout', [AuthController::class, 'logout']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('guest')->group(function () {
-    Route::get('/login', [AuthController::class, 'showLogin']);
-    Route::get('/register', [AuthController::class, 'showRegister']);
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 });
 
-Route::post('/register', [AuthController::class, 'register']);
+Route::post('/register', [AuthController::class, 'register'])->name('register.post');
 
-Route::get('/profile', [UserController::class, 'showProfile']);
+Route::get('/profile', [UserController::class, 'showProfile'])->middleware(['auth', 'verified']);;
 
 Route::get('/email/verify', function () {
     return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
+})->name('verification.notice');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
     $request->fulfill();
@@ -79,9 +79,10 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
 })->middleware(['auth', 'signed'])->name('verification.verify');;
 
 Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
+    $user = session('user');
+    $user->sendEmailVerificationNotification();
     return back()->with('message', 'Verification link sent!');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+})->name('verification.send');
 
 Route::get('/forgot-password', [AuthController::class, 'showForgotPassword']);
 
@@ -159,6 +160,8 @@ Route::middleware('admin')->group(function () {
 
         Route::prefix('animal')->group(function () {
             Route::get('/list', [AnimalController::class, 'show']);
+            Route::get('/adoption-requests', [AnimalController::class, 'showAdoptionRequests']);
+            Route::get('/adoption-requests/{id}', [AnimalController::class, 'showAdoptionRequest']);
             Route::get('/edit/{id}', [AnimalController::class, 'showEdit']);
             Route::post('/edit/{id}', [AnimalController::class, 'update']);
             Route::get('/add', [AnimalController::class, 'showAdd']);

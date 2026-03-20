@@ -13,7 +13,7 @@ new class extends Component
     public function mount($animal){
         $this->animal = $animal;
         $this->photo_path = $this->animal->fotos->pluck('path');
-        if(!empty($this->photo_path)){
+        if(!$this->photo_path->isEmpty()){
             $this->current_photo = $this->photo_path[$this->var];
         }
     }

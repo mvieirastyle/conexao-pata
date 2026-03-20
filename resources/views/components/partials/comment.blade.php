@@ -1,20 +1,21 @@
+@php
+$user = Auth::user();
+$canDelete = $user && ($user->id === $comment->user_id || $user->admin);
+@endphp
+
 <div class="forum-comment mb-3 p-2" wire:key="comment-{{ $comment->id }}">
 
     <div class="dropdown text-end">
-        <a @if(Auth::id()===$comment->user_id)
-            href="#" data-bs-toggle="dropdown"
-            @endif
-            class="{{ Auth::id() !== $comment->user_id ? 'text-muted' : '' }}"
-            style="{{ Auth::id() !== $comment->user_id ? 'pointer-events: none; opacity: 0.5;' : '' }}"
-            >
+        <a @if($canDelete) href="#" data-bs-toggle="dropdown" @endif class="{{ !$canDelete ? 'text-muted' : '' }}"
+            style="{{ !$canDelete ? 'pointer-events: none; opacity: 0.5;' : '' }}">
             <i class="fa-solid fa-ellipsis" style="color: green"></i>
         </a>
 
-        @if(Auth::id() === $comment->user_id)
+        @if($canDelete)
         <ul class="dropdown-menu">
             <li>
-                <button wire:click="deleteComment({{ $comment->id }})" wire:confirm="{{ __('blog.post.confirmed_delete') }}" 
-                    class="dropdown-item text-danger">
+                <button wire:click="deleteComment({{ $comment->id }})"
+                    wire:confirm="{{ __('blog.post.confirmed_delete') }}" class="dropdown-item text-danger">
                     <i class="fas fa-trash"></i> Delete
                 </button>
             </li>

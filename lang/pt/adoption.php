@@ -13,9 +13,9 @@ return [
 
     'section_animals' => 'Animais',
     'label_have_animals' => 'Tem animais? Quais?',
-    'animal_dog' => 'Cão / Dog',
-    'animal_cat' => 'Gato / Cat',
-    'animal_other' => 'Outro / Other',
+    'animal_dog' => 'Cão',
+    'animal_cat' => 'Gato',
+    'animal_other' => 'Outro',
     'animal_none' => 'Não tenho nenhum animal',
 
     'section_residence' => 'Residência',
