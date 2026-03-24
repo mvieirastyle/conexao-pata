@@ -1,41 +1,13 @@
-@extends('layouts.default')
+@extends('layouts.admin')
 
 @section('content')
 
-<section class="py-5 bg-green header-small" style="background-color: var(--green);">
-    <div class="container text-center">
-        <h1 class="display-4 fw-bold text-white">Blog</h1>
-        <p class="lead text-white">{{__('blog.index.text_blog')}}</p>
-    </div>
-</section>
-
-
 <div class="container mt-4 py-5">
 
-    @if (Auth::check())
-    <div class="mb-4 text-end">
-        <a href="/blog/new_post" class="btn btn-orange">
-            <i class="fas fa-plus"></i> {{__('blog.index.create_post')}}
-        </a>
-    </div>
-    @else
-    <div class="alert alert-warning">
-        {!! __('blog.index.alert_login') !!}
-    </div>
-    @endif
-
-    <div class="d-flex gap-3 mb-3 text-muted small">
-        <span>
-            <x-heroicon-o-newspaper style="width:20px; height:20px;" />
-            {{__('blog.index.all_posts')}}
-        </span>
-    </div>
-
     <div class="row g-4">
-        @forelse($posts as $post)
+        @foreach($posts as $post)
         <div class="col-md-6">
             <div class="card h-100 shadow-sm border-0">
-
                 <div class="card-body">
 
                     <div class="d-flex align-items-center mb-3">
@@ -57,19 +29,30 @@
                     </div>
 
                     <small class="text-muted">{{ $post->created_at->format('d/m/Y') }}</small>
+
+                    <div class="mt-3 d-flex gap-2">
+                        <form action="/admin/blog/{{ $post->id }}/reject" method="POST" style="display: inline;" onsubmit="return confirm('Tem certeza que deseja rejeitar este post?');">
+                            @csrf
+                            <button type="submit" class="btn btn-sm btn-danger">
+                                <i class="fa-solid fa-x"></i> Negar
+                            </button>
+                        </form>
+
+                        <form action="/admin/blog/{{ $post->id }}/accept" method="POST" style="display: inline;">
+                            @csrf
+                            <button type="submit" class="btn btn-sm btn-success">
+                                <i class="fas fa-check"></i> Aceitar
+                            </button>
+                        </form>
+                    </div>
                 </div>
 
                 <a href="/blog/post/{{ $post->id }}" class="stretched-link"></a>
             </div>
         </div>
-        @empty
-          <p class="text-muted">O blog ainda não tem nenhum post :(</p>
-        @endforelse
+        @endforeach
     </div>
 
-    <div class="mt-3 align-items-end justify-content-end d-flex">
-        {{ $posts->links() }}
-    </div>
 </div>
 
 @endsection

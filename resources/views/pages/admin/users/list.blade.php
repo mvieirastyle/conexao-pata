@@ -29,6 +29,7 @@
         <div class="filter-form bg-dark text-white p-3 rounded d-flex gap-3 flex-nowrap">
 
             <select class="form-select bg-light text-dark" name="admin">
+                
                 <option value="" disabled {{ request('admin')===null ? 'selected' : '' }}>
                     {{__('users.filter_type')}}
                 </option>
@@ -43,13 +44,13 @@
             </select>
 
             <div class="input-group">
-                <div class="input-group-text">@</div>
+                <div class="input-group-text"><i class="fa-solid fa-at"></i></div>
                 <input type="text" class="form-control" placeholder="Username" name="name"
                     value="{{ request('name') }}">
             </div>
 
             <div class="input-group">
-                <div class="input-group-text">✉</div>
+                <div class="input-group-text"><i class="fa-solid fa-envelope"></i></div>
                 <input type="text" class="form-control" placeholder="Email" name="email" value="{{ request('email') }}">
             </div>
 

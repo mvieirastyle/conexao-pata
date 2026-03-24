@@ -11,10 +11,12 @@ class DetailsController extends Controller
 
     public function show(int $id) {
 
-        $animal = Animal::with('category')->find($id); 
-        
+        $animal = Animal::with(['category', 'vacinas'])->findOrFail($id);
+        $vacinas = $animal->vacinas;
+
         return view('pages.details', [
             'animal' => $animal,
+            'vacinas' => $vacinas,
         ]);
     }
 

@@ -87,38 +87,43 @@ public function showAdoptionForm(int $id)
 public function sendAdoptionForm(Request $request, $id)
 {
     $animal = Animal::findOrFail($id);
+    
     $data = $request->validate([
-        'full_name' => 'required|string|max:25',
-        'email' => 'required|email|max:55',
+        'full_name' => 'required|string',
+        'email' => 'required|email',
         'birth_date' => 'required|date',
-        'nationality' => 'required|string|max:50',
-        'id_number' => 'required|string|max:9',
-        'phone' => 'required|string|max:9',
-        'address' => 'required|string|max:255',
+        'nationality' => 'required|string',
+        'id_number' => 'required|string',
+        'phone' => 'required|string',
+        'address' => 'required|string',
+
         'animals.*' => 'string',
         'residence_type.*' => 'string',
         'wall_height' => 'nullable|string',
-        'lifestyle' => 'required|string|max:255',   
-        'daily_routine' => 'required|string|max:255',
-        'dog_walks' => 'nullable|string|max:255',
-        'house_access' => 'required|string|max:255',
-        'vacation_plans' => 'required|string|max:255',
-        'veterinarian' => 'required|string|max:255',
-        'past_animals' => 'required|string|max:255',
-        'concerns' => 'required|string|max:255',
-        'unacceptable_behaviors' => 'required|string|max:255',
-        'undesired_behaviors' => 'required|string|max:255',
-        'dog_training' => 'nullable|string|max:255',
-        'adoption_decision' => 'required|string|max:255',
-        'life_changes' => 'required|string|max:255',
-        'past_separations' => 'required|string|max:255',
-        'family_constraints' => 'required|string|max:255',
-        'responsibility' => 'accepted',
-     ]); 
 
-     FormAdoption::createNew($data, $animal->id);
+        'lifestyle' => 'nullable|string',
+        'daily_routine' => 'nullable|string',
+        'dog_walks' => 'nullable|string',
+        'house_access' => 'nullable|string',
+        'vacation_plans' => 'nullable|string',
+        'veterinarian' => 'nullable|string',
+        'past_animals' => 'nullable|string',
+        'concerns' => 'nullable|string',
+        'unacceptable_behaviors' => 'nullable|string',
+        'undesired_behaviors' => 'nullable|string',
+        'dog_training' => 'nullable|string',
+
+        'adoption_decision' => 'required|string',
+        'life_changes' => 'required|string',
+        'past_separations' => 'required|string',
+        'family_constraints' => 'required|string',
+        'responsibility' => 'accepted',
+    ]);
+
+    FormAdoption::createNew($data, $animal->id);
     
-     return redirect('/animal/' .$id)->with('success', 'Formulário de adoção enviado com sucesso!');
+    return redirect('/animal/' . $id)->with('success', 'Formulário de adoção enviado com sucesso!');
 }
+
 
 }

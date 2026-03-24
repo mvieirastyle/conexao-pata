@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('birth_date');
             $table->string('nationality', 50);
             $table->string('id_number', 9);
-            $table->string('phone', 9);
+            $table->string('phone', 20);
             $table->string('address', 255);
             $table->json('animals');
             $table->json('residence_type');

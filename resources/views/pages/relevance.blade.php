@@ -73,7 +73,7 @@
                     <div class="card-body text-center">
                         <h4 class="card-title text-black">{{__('front_end.relevance.volunteer')}}</h4>
                         <p class="card-text">{{__('front_end.relevance.text_volunteer')}}</p>
-                        <a href="/contact" class="btn btn-light text-orange fw-bold">{{__('front_end.relevance.volunteer_button')}}</a>
+                        <a href="/volunteer" class="btn btn-light text-orange fw-bold">{{__('front_end.relevance.volunteer_button')}}</a>
                     </div>
                 </div>
             </div>

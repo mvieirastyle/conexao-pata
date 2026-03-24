@@ -18,7 +18,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     @endif
-    
+
     <!-- Back Button & Title -->
     <div class="row align-items-center mb-5">
         <div class="col-md-3">
@@ -46,9 +46,11 @@
                         </span>
                     </div>
                     @if ($animal->nome)
-                        <span class="badge bg-success fs-6 rounded-pill px-3 py-2">{{__('front_end.details.avaliable')}}</span>
+                    <span
+                        class="badge bg-success fs-6 rounded-pill px-3 py-2">{{__('front_end.details.avaliable')}}</span>
                     @else
-                        <span class="badge bg-secondary fs-6 rounded-pill px-3 py-2">{{__('front_end.details.unavaliable')}}</span>
+                    <span
+                        class="badge bg-secondary fs-6 rounded-pill px-3 py-2">{{__('front_end.details.unavaliable')}}</span>
                     @endif
                 </div>
 
@@ -74,17 +76,34 @@
                 </div>
 
                 <!-- Description -->
-                    <div class="mb-5">
+                <div class="mb-5">
                     <p class="lead text-muted" style="line-height: 1.8;">
                         {!! $animal->storytelling ?? $animal->observacoes ?? __('front_end.details.description') !!}</p>
                     @if(!empty($animal->comportamento))
-                        <p class="text-muted">
-                            <i class="fas fa-info-circle me-2"></i>
-                            {!!__('front_end.details.behavior')!!}
-                            {{ $animal->comportamento }}
-                        </p>
+                    <p class="text-muted">
+                        <i class="fas fa-info-circle me-2"></i>
+                        {!!__('front_end.details.behavior')!!}
+                        {{ $animal->comportamento }}
+                    </p>
                     @endif
-                </div>  
+                    @if (!empty($animal->microchip))
+                    <p class="text-muted">
+                        <i class="fa-solid fa-microchip"></i>
+                        <strong>Microchip:</strong>
+                        {{ $animal->microchip ? 'Sim' : 'Não'  }}
+                    </p>
+                    @endif
+                    @if (!empty($vacinas) && $vacinas->isNotEmpty())
+                    <p class="text-muted">
+                        <i class="fa-solid fa-syringe"></i>
+                        <strong>Vacinas:</strong>
+                        @foreach ($vacinas as $vacina)
+                            <span class="badge bg-success text-white me-1">{{ $vacina->type }}</span>
+                        @endforeach
+                    </p>
+                    @endif
+
+                </div>
 
                 <!-- Action Button -->
                 <div>
@@ -98,9 +117,9 @@
     </div>
 
     <div class="d-flex justify-content-center gap-3 mt-5">
-        
+
     </div>
 
-    
+
 </div>
 @endsection

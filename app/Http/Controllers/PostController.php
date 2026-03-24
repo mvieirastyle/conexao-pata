@@ -30,7 +30,7 @@ class PostController extends Controller
     public function show(): View
     {
         $posts = Cache::remember($this->getPostsCacheKey(), now()->addHours(3), function () {
-            return Post::query()->paginate(6)->withQueryString();
+            return Post::where('status', 'aprovado')->paginate(6)->withQueryString();
         });
 
         return view('pages.blog.index', [
@@ -83,7 +83,7 @@ class PostController extends Controller
 
         Post::createNew($request->all(), $id);
 
-        Cache::increment('posts_cache_version');
+        Cache::forget('posts_cache_version');
 
         return redirect('/blog');
     }
@@ -106,7 +106,7 @@ class PostController extends Controller
     {
         Post::deletePost($id);
 
-        Cache::increment('posts_cache_version');
+        Cache::forget('posts_cache_version');
 
         return redirect('/blog');
     }
@@ -129,8 +129,38 @@ class PostController extends Controller
 
         Post::updatePost($id, $request->all());
 
-        Cache::increment('posts_cache_version');
+        Cache::forget('posts_cache_version');
 
         return redirect('/blog')->with('success', 'Sua publicação foi editada com sucesso');
     }
-}
+
+    public function showManagePost(){
+        $posts = Post::where('status', '!=', 'aprovado')->where('status', '!=', 'negado')->get();
+
+        return view('pages.admin.blog.manage', [
+            'posts' => $posts,
+        ]);
+    }
+    public function acceptPost(int $id)
+    {
+        $post = Post::findOrFail($id);
+        $post->update([
+            'status' => 'aprovado'
+            ]);
+
+        Cache::forget('posts_cache_version');
+
+        return redirect('/admin/blog/posts')->with('success', 'Post aprovado com sucesso!');
+    }
+
+    public function rejectPost(int $id)
+    {
+        $post = Post::findOrFail($id);
+        $post->update([
+            'status' => 'negado'
+            ]);
+
+        Cache::forget('posts_cache_version');
+
+        return redirect('/admin/blog/posts')->with('success', 'Post rejeitado com sucesso!');
+    }}

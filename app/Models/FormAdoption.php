@@ -35,6 +35,7 @@ class FormAdoption extends Model
         'past_separations',
         'family_constraints',
         'responsibility',
+        'accept'
     ];
 
     protected $casts = [

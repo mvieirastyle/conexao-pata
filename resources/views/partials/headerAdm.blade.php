@@ -31,6 +31,17 @@
                     </ul>
                 </li>
     
+                     <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Gerir Blog
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/admin/blog/posts">Gerir Posts</a></li>
+                        <li><a class="dropdown-item" href="#">Gerir Comentarios</a></li>
+                    </ul>
+                </li>
+    
                 <li class="nav-item">
                     <a class="nav-link" href="/admin/animal/adoption-requests">Pedidos de Adoção</a>
                 </li>

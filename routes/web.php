@@ -38,13 +38,17 @@ Route::get('/form-adoption/{id}', [FormsController::class, 'showAdoptionForm']);
 
 Route::post('/form-adoption/{id}', [FormsController::class, 'sendAdoptionForm']);
 
-Route::get('/donate', function () {return view('pages.donate');});
+Route::get('/donate', function () {
+    return view('pages.donate');
+});
 
-Route::get('/volunteer', function () {return view('pages.volunteer');});
+Route::get('/volunteer', function () {
+    return view('pages.volunteer');
+});
 
 Route::get('/form-volunteer', [FormsController::class, 'showVolunteerForm']);
 
-Route::post('/form-volunteer', [FormsController::class,'sendVolunteerForm']);
+Route::post('/form-volunteer', [FormsController::class, 'sendVolunteerForm']);
 
 Route::get('/form-fat', [FormsController::class, 'showFatForm']);
 
@@ -91,7 +95,7 @@ Route::post('/forgot-password', [AuthController::class, 'sendResetLink']);
 Route::get('/reset-password/{token}', [AuthController::class, 'showResetPassword'])
     ->middleware('guest')
     ->name('password.reset');
-    
+
 Route::post('/reset-password', [AuthController::class, 'resetPassword']);
 
 Route::post('/profile/edit/{id}', [UserController::class, 'update']);
@@ -143,32 +147,38 @@ Route::middleware('admin')->group(function () {
         Route::get('/entradas-excel', function () {
             return Excel::download(new EntradasChartExport, 'relatorio-entradas.xlsx');
         });
-         Route::get('/adoptions-excel', function () {
+        Route::get('/adoptions-excel', function () {
             return Excel::download(new AdoptionsChartExport, 'relatorio-adocoes.xlsx');
         });
 
-
-
-        Route::prefix('users')->group(function () {
-            Route::get('/list', [UserController::class, 'showList']);
-            Route::get('/add', [UserController::class, 'showAdd']);
-            Route::post('/add', [UserController::class, 'add']);
-            Route::get('/edit/{id}', [UserController::class, 'showEdit']);
-            Route::post('/edit/{id}', [UserController::class, 'update']);
-            Route::post('/delete/{id}', [UserController::class, 'delete']);
+        Route::prefix('blog')->group(function () {
+            Route::get('/posts', [PostController::class, 'showManagePost']);
+            Route::post('/{id}/accept', [PostController::class, 'acceptPost']);
+            Route::post('/{id}/reject', [PostController::class, 'rejectPost']);
         });
+    });
 
-        Route::prefix('animal')->group(function () {
-            Route::get('/list', [AnimalController::class, 'show']);
-            Route::get('/adoption-requests', [AnimalController::class, 'showAdoptionRequests']);
-            Route::get('/adoption-requests/{id}', [AnimalController::class, 'showAdoptionRequest']);
-            Route::get('/edit/{id}', [AnimalController::class, 'showEdit']);
-            Route::post('/edit/{id}', [AnimalController::class, 'update']);
-            Route::get('/add', [AnimalController::class, 'showAdd']);
-            Route::post('/add', [AnimalController::class, 'add']);
-            Route::post('/delete/{id}', [AnimalController::class, 'delete']);
-            Route::get('/list/export', [AnimalController::class, 'exportExcel']);
-            Route::get('/list/animais-pdf', [AnimalController::class, 'generatePdf']);
-        });
+    Route::prefix('users')->group(function () {
+        Route::get('/list', [UserController::class, 'showList']);
+        Route::get('/add', [UserController::class, 'showAdd']);
+        Route::post('/add', [UserController::class, 'add']);
+        Route::get('/edit/{id}', [UserController::class, 'showEdit']);
+        Route::post('/edit/{id}', [UserController::class, 'update']);
+        Route::post('/delete/{id}', [UserController::class, 'delete']);
+    });
+
+    Route::prefix('animal')->group(function () {
+        Route::get('/list', [AnimalController::class, 'show']);
+        Route::get('/adoption-requests', [AnimalController::class, 'showAdoptionRequests']);
+        Route::get('/adoption-requests/{id}', [AnimalController::class, 'showAdoptionRequest']);
+        Route::post('/adoption-requests/{id}/reject', [AnimalController::class, 'rejectAdoption']);
+        Route::post('/adoption-requests/{id}/accept', [AnimalController::class, 'acceptAdoption']);
+        Route::get('/edit/{id}', [AnimalController::class, 'showEdit']);
+        Route::post('/edit/{id}', [AnimalController::class, 'update']);
+        Route::get('/add', [AnimalController::class, 'showAdd']);
+        Route::post('/add', [AnimalController::class, 'add']);
+        Route::post('/delete/{id}', [AnimalController::class, 'delete']);
+        Route::get('/list/export', [AnimalController::class, 'exportExcel']);
+        Route::get('/list/animais-pdf', [AnimalController::class, 'generatePdf']);
     });
 });

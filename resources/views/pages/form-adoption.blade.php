@@ -24,7 +24,8 @@
         <div class="col-lg-10">
             <div class="card shadow">
                 <div class="card-header bg-success text-white">
-                    <h4 class="mb-0"><i class="fas fa-plus-circle"></i> {{ __('adoption.title', ['name' => $animal->nome]) }}</h4>
+                    <h4 class="mb-0"><i class="fas fa-plus-circle"></i> {{ __('adoption.title', ['name' =>
+                        $animal->nome]) }}</h4>
                 </div>
 
                 <div class="card-body">
@@ -35,49 +36,48 @@
 
                         <div class="row">
                             <div class="col-md-12 mb-3">
-                                <label class="form-label">{{ __('adoption.label_full_name') }}</label>
+                                <label class="form-label">{!! __('adoption.label_full_name') !!}</label>
                                 <input type="text"
                                     value="{{ Auth::check() ? Auth::user()->first_name . ' ' . Auth::user()->last_name : '' }}"
-                                    class="form-control" name="full_name" required>
+                                    class="form-control" name="full_name" maxlength="25" required>
                             </div>
 
                             <div class="col-md-12 mb-3">
-                                <label class="form-label">{{ __('adoption.label_email') }}</label>
+                                <label class="form-label">{!! __('adoption.label_email') !!}</label>
                                 <input type="email" value="{{ Auth::check() ? Auth::user()->email : '' }}"
-                                    class="form-control" name="email" required>
+                                    class="form-control" name="email" maxlength="60" required>
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">{{ __('adoption.label_birth_date') }}</label>
-                                <input type="date" class="form-control" name="birth_date" required>
+                                <label class="form-label">{!! __('adoption.label_birth_date') !!}</label> <input
+                                    type="date" class="form-control" name="birth_date" required>
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">{{ __('adoption.label_nationality') }}</label>
-                                <input type="text" class="form-control" name="nationality" required>
+                                <label class="form-label">{!! __('adoption.label_nationality') !!}</label> <input
+                                    type="text" class="form-control" name="nationality" maxlength="50" required>
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">{{ __('adoption.label_id_number') }}</label>
-                                <input type="text" class="form-control" name="id_number" required>
+                                <label class="form-label">{!! __('adoption.label_id_number') !!}</label> <input
+                                    type="text" class="form-control" name="id_number" maxlength="9" required>
                             </div>
 
                             <div class="col-md-6 mb-3">
-                                <label class="form-label">{{ __('adoption.label_phone') }}</label>
-                                <input type="text" class="form-control" name="phone" required>
+                                <label class="form-label">{!! __('adoption.label_phone') !!}</label> <input type="text"
+                                    class="form-control" name="phone" required>
                             </div>
 
                             <div class="col-md-12 mb-3">
-                                <label class="form-label">{{ __('adoption.label_address') }}</label>
-                                <input type="text" class="form-control" name="address" required>
+                                <label class="form-label">{!! __('adoption.label_address') !!}</label> <input
+                                    type="text" class="form-control" name="address" maxlength="255" required>
                             </div>
                         </div>
 
                         <!-- ANIMAIS -->
                         <h5 class="mb-3 text-muted border-bottom pb-2">{{ __('adoption.section_animals') }}</h5>
 
-                        <label class="form-label">{{ __('adoption.label_have_animals') }}</label>
-
+                        <label class="form-label">{!! __('adoption.label_have_animals') !!}</label>
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" name="animals[]" value="dog">
                             <label class="form-check-label">{{ __('adoption.animal_dog') }}</label>
@@ -100,7 +100,7 @@
 
                         <!-- RESIDÊNCIA -->
                         <h5 class="mb-3 text-muted border-bottom pb-2">{{ __('adoption.section_residence') }}</h5>
-                        <label class="form-label">{{ __('adoption.label_residence_type') }}</label>
+                        <label class="form-label">{!! __('adoption.label_residence_type') !!}</label>
 
                         <div class="form-check mb-3">
                             <input class="form-check-input" type="checkbox" name="residence_type[]" value="apartment">
@@ -117,7 +117,7 @@
                             <label class="form-check-label">{{ __('adoption.residence_farm') }}</label>
                         </div>
 
-                        <label class="form-label">{{ __('adoption.label_wall_height') }}</label>
+                        <label class="form-label">{!! __('adoption.label_wall_height') !!}</label>
 
                         <div class="form-check mb-3">
                             <input class="form-check-input" type="radio" name="wall_height" value="none">
@@ -138,78 +138,81 @@
                         <h5 class="mb-3 text-muted border-bottom pb-2">{{ __('adoption.section_questions') }}</h5>
 
                         <div class="mb-3">
-                            <label class="form-label">{{ __('adoption.question_1') }}</label>
-                            <textarea class="form-control" name="lifestyle" rows="2"></textarea>
+                            <label class="form-label">{!! __('adoption.question_1') !!}</label>
+                            <textarea class="form-control" name="lifestyle" rows="2" maxlength="255"></textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">{{ __('adoption.question_2') }}</label>
-                            <textarea class="form-control" name="daily_routine" rows="2"></textarea>
+                            <label class="form-label">{!! __('adoption.question_2') !!}</label>
+                            <textarea class="form-control" name="daily_routine" rows="2" maxlength="255"></textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">{{ __('adoption.question_3') }}</label>
-                            <textarea class="form-control" name="dog_walks" rows="2"></textarea>
+                            <label class="form-label">{!! __('adoption.question_3') !!}</label>
+                            <textarea class="form-control" name="dog_walks" rows="2" maxlength="255"></textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">{{ __('adoption.question_4') }}</label>
-                            <textarea class="form-control" name="house_access" rows="2"></textarea>
+                            <label class="form-label">{!! __('adoption.question_4') !!}</label>
+                            <textarea class="form-control" name="house_access" rows="2" maxlength="255"></textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">{{ __('adoption.question_5') }}</label>
-                            <textarea class="form-control" name="vacation_plans" rows="2"></textarea>
+                            <label class="form-label">{!! __('adoption.question_5') !!}</label>
+                            <textarea class="form-control" name="vacation_plans" rows="2" maxlength="255"></textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">{{ __('adoption.question_6') }}</label>
-                            <textarea class="form-control" name="veterinarian" rows="2"></textarea>
+                            <label class="form-label">{!! __('adoption.question_6') !!}</label>
+                            <textarea class="form-control" name="veterinarian" rows="2" maxlength="255"></textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">{{ __('adoption.question_7') }}</label>
-                            <textarea class="form-control" name="past_animals" rows="2"></textarea>
+                            <label class="form-label">{!! __('adoption.question_7') !!}</label>
+                            <textarea class="form-control" name="past_animals" rows="2" maxlength="255"></textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">{{ __('adoption.question_8') }}</label>
-                            <textarea class="form-control" name="concerns" rows="2"></textarea>
+                            <label class="form-label">{!! __('adoption.question_8') !!}</label>
+                            <textarea class="form-control" name="concerns" rows="2" maxlength="255"></textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">{{ __('adoption.question_9') }}</label>
-                            <textarea class="form-control" name="unacceptable_behaviors" rows="2"></textarea>
+                            <label class="form-label">{!! __('adoption.question_9') !!}</label>
+                            <textarea class="form-control" name="unacceptable_behaviors" rows="2"
+                                maxlength="255"></textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">{{ __('adoption.question_10') }}</label>
-                            <textarea class="form-control" name="undesired_behaviors" rows="2"></textarea>
+                            <label class="form-label">{!! __('adoption.question_10') !!}</label>
+                            <textarea class="form-control" name="undesired_behaviors" rows="2"
+                                maxlength="255"></textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">{{ __('adoption.question_11') }}</label>
-                            <textarea class="form-control" name="dog_trainer" rows="2"></textarea>
+                            <label class="form-label">{!! __('adoption.question_11') !!}</label>
+                            <textarea class="form-control" name="dog_training" rows="2" maxlength="255"></textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">{{ __('adoption.question_12') }}</label>
-                            <textarea class="form-control" name="adoption_decision" rows="2"></textarea>
+                            <label class="form-label">{!! __('adoption.question_12') !!}</label>
+                            <textarea class="form-control" name="adoption_decision" rows="2" maxlength="255"></textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">{{ __('adoption.question_13') }}</label>
-                            <textarea class="form-control" name="life_changes" rows="2"></textarea>
+                            <label class="form-label">{!! __('adoption.question_13') !!}</label>
+                            <textarea class="form-control" name="life_changes" rows="2" maxlength="255"></textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">{{ __('adoption.question_14') }}</label>
-                            <textarea class="form-control" name="past_separations" rows="2"></textarea>
+                            <label class="form-label">{!! __('adoption.question_14') !!}</label>
+                            <textarea class="form-control" name="past_separations" rows="2" maxlength="255"></textarea>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label">{{ __('adoption.question_15') }}</label>
-                            <textarea class="form-control" name="family_constraints" rows="2"></textarea>
+                            <label class="form-label">{!! __('adoption.question_15') !!}</label>
+                            <textarea class="form-control" name="family_constraints" rows="2"
+                                maxlength="255"></textarea>
                         </div>
 
                         <!-- RESPONSABILIDADE -->

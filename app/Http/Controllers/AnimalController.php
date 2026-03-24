@@ -61,14 +61,50 @@ class AnimalController extends Controller
         ]);
     }
 
+    private function getAdoptionsCacheKey()
+    {
+        $filters = request()->only(['email', 'phone', 'tab']);
+        $page = request('page', 1);
+
+        $version = Cache::get('adoptions_cache_version', 1);
+
+        return 'adoptions_' . $version . '_' . md5(json_encode($filters) . '_page_' . $page);
+    }
+
     public function showAdoptionRequests()
     {
-        $formAdoptions = FormAdoption::with('animal')
-            ->latest()
-            ->paginate(10);
+        $activeTab = request('tab', 'pendentes');
+
+        $formAdoptions = Cache::remember(
+            $this->getAdoptionsCacheKey(),
+            now()->addHours(3),
+            function () use ($activeTab) {
+
+                $query = FormAdoption::with('animal');
+
+                if (request('email')) {
+                    $query->where('email', 'like', '%' . request('email') . '%');
+                }
+
+                if (request('phone')) {
+                    $query->where('phone', 'like', '%' . request('phone') . '%');
+                }
+
+                if ($activeTab === 'pendentes') {
+                    $query->where('accept', 0);
+                }
+
+                if ($activeTab === 'aceitos') {
+                    $query->where('accept', 1);
+                }
+
+                return $query->latest()->paginate(10)->withQueryString();
+            }
+        );
 
         return view('pages.admin.animal.adoption-request', [
             'formAdoptions' => $formAdoptions,
+            'activeTab' => $activeTab,
         ]);
     }
 
@@ -356,5 +392,37 @@ class AnimalController extends Controller
         $pdf = Pdf::loadView('pages.admin.pdf-adoptions', ['rows' => $rows]);
 
         return $pdf->download('relatorio-adocoes-grafico.pdf');
+    }
+
+
+
+    public function acceptAdoption($id)
+    {
+        $formAdoption = FormAdoption::with('animal')->findOrFail($id);
+        $animal = $formAdoption->animal;
+
+        $animal->update([
+            'disponivel' => 0,
+            'data_adocao' => Carbon::now(),
+        ]);
+
+        $formAdoption->update([
+            'accept' => 1,
+        ]);
+
+        Cache::forget('adoptions_cache_version');
+
+        return redirect('/admin/animal/adoption-requests')->with('success', 'Pedido de adoção aceito e animal marcado como indisponível.');
+    }
+
+    public function rejectAdoption($id)
+    {
+        FormAdoption::findOrFail($id);
+
+        FormAdoption::delete();
+
+        Cache::forget('adoptions_cache_version');
+
+        return redirect('/admin/animal/adoption-requests')->with('success', 'Pedido de adoção negado.');
     }
 }
