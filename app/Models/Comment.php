@@ -13,6 +13,7 @@ class Comment extends Model
         'post_id',
         'reply_id',
         'content',
+        'status',
     ];
 
     public static function createComment(array $data = [])
@@ -39,6 +40,11 @@ class Comment extends Model
     public function replies()
     {
         return $this->hasMany(Comment::class, 'reply_id');
+    }
+
+    public function scopeValidated($query)
+    {
+        return $query->where('status', 'aprovado');
     }
 
     public function parent()

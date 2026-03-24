@@ -12,6 +12,22 @@
 
 <div class="container mt-4 py-5">
 
+    @if (session('error'))
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="fas fa-exclamation-triangle me-2"></i>
+        {{ session('error') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
+    @if (session('success'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <i class="fas fa-check-circle me-2"></i>
+        {{ session('success') }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    @endif
+
     @if (Auth::check())
     <div class="mb-4 text-end">
         <a href="/blog/new_post" class="btn btn-orange">
@@ -63,7 +79,9 @@
             </div>
         </div>
         @empty
-          <p class="text-muted">O blog ainda não tem nenhum post :(</p>
+        <p class="text-muted">
+            O blog ainda não tem nenhum post
+        </p>
         @endforelse
     </div>
 

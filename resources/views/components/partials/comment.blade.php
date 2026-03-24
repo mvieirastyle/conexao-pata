@@ -1,17 +1,11 @@
-@php
-$user = Auth::user();
-$canDelete = $user && ($user->id === $comment->user_id || $user->admin);
-@endphp
-
 <div class="forum-comment mb-3 p-2" wire:key="comment-{{ $comment->id }}">
-
     <div class="dropdown text-end">
-        <a @if($canDelete) href="#" data-bs-toggle="dropdown" @endif class="{{ !$canDelete ? 'text-muted' : '' }}"
-            style="{{ !$canDelete ? 'pointer-events: none; opacity: 0.5;' : '' }}">
+        <a href="#" data-bs-toggle="dropdown"
+            class="{{ !($comment->user_id === auth()->id() || auth()->user()->admin) ? 'text-muted' : '' }}"
+            style="{{ !($comment->user_id === auth()->id() || auth()->user()->admin) ? 'pointer-events: none; opacity: 0.5;' : '' }}">
             <i class="fa-solid fa-ellipsis" style="color: green"></i>
         </a>
-
-        @if($canDelete)
+        @if($comment->user_id === auth()->id() || auth()->user()->admin)
         <ul class="dropdown-menu">
             <li>
                 <button wire:click="deleteComment({{ $comment->id }})"
@@ -22,29 +16,23 @@ $canDelete = $user && ($user->id === $comment->user_id || $user->admin);
         </ul>
         @endif
     </div>
-
     <div class="d-flex align-items-start">
-
         <img src="{{ $comment->user->fotos->first()?->path 
                     ? asset('storage/'.$comment->user->fotos->first()->path) 
                     : asset('/images/profilePicture.png') }}" class="forum-avatar me-3" />
-
         <div class="flex-grow-1">
             <div class="d-flex justify-content-between align-items-center mb-1">
                 <span class="fw-semibold text-dark">{{ '@'.$comment->user->name }}</span>
                 <small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small>
             </div>
-
             <div class="forum-content mb-2">
                 {!! $comment->content !!}
             </div>
-
             <button wire:click="toggleReply({{ $comment->id }})" type="button"
                 class="btn btn-sm btn-outline-secondary mb-2 @guest opacity-50 cursor-not-allowed @endguest" @guest
                 disabled title="Você precisa estar logado para responder" @endguest>
                 Reply
             </button>
-
             @if ($replyingTo === $comment->id)
             <div class="mt-2">
                 <textarea wire:model="comment.reply{{ $comment->id }}" rows="3" class="form-control forum-textarea mb-2"
@@ -57,13 +45,11 @@ $canDelete = $user && ($user->id === $comment->user_id || $user->admin);
             @endif
         </div>
     </div>
-
-    @if($comment->replies->count())
+    @if($comment->replies()->validated()->count())
     <div class="comment-children ms-4 mt-2">
-        @foreach($comment->replies as $reply)
+        @foreach($comment->replies()->validated()->get() as $reply)
         @include('components.partials.comment', ['comment' => $reply])
         @endforeach
     </div>
     @endif
-
 </div>

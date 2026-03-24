@@ -26,6 +26,8 @@ new class extends Component
 
             Comment::createComment($data);
             $this->comment[$key] = '';
+            
+            return redirect('/blog/post/' . $this->post->id)->with('success', 'Seu comentário foi submetido com sucesso, aguarde que um administrador valide-o. Obrigada pela sua contribuição!');
         }   
 
     }
@@ -43,7 +45,7 @@ public function deleteComment(int $commentId)
 {
     $comment = Comment::find($commentId);
 
-    if ($comment && $comment->user_id === auth()->id()) {
+    if ($comment && $comment->user_id === auth()->id() || $comment->user->admin) {
         $this->deleteReplies($comment);
     }
 }
@@ -88,7 +90,7 @@ public function deleteReplies(Comment $comment)
     </div>
     @endauth
 
-    @forelse($post->comments->whereNull('reply_id') as $comment)
+    @forelse($post->comments()->validated()->whereNull('reply_id')->get() as $comment)
 
     @include('components.partials.comment', ['comment' => $comment])
 

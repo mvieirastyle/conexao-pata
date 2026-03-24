@@ -16,6 +16,7 @@ class Post extends Model
         'description',
         'created_at',
         'updated_at',
+        'status',
     ];
 
     public static function createNew(array $data = [], int $id)

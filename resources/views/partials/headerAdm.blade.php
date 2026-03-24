@@ -38,7 +38,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/admin/blog/posts">Gerir Posts</a></li>
-                        <li><a class="dropdown-item" href="#">Gerir Comentarios</a></li>
+                        <li><a class="dropdown-item" href="/admin/blog/comments">Gerir Comentarios</a></li>
                     </ul>
                 </li>
     

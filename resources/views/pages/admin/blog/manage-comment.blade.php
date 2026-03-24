@@ -20,42 +20,39 @@
     @endif
 
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1><i class="fas fa-tools"></i> Filtragem de Postagens</h1>
+        <h1><i class="fas fa-tools"></i> Filtragem de Comentários </h1>
     </div>
 
     <div class="row g-4">
-        @foreach($posts as $post)
+        @foreach($comments->where('status', 'pendente') as $comment)
         <div class="col-md-6">
             <div class="card h-100 shadow-sm border-0" style="position: relative;">
-                <a href="/blog/post/{{ $post->id }}" class="card-body" style="text-decoration: none;">
+                <a href="/blog/comment/{{ $comment->id }}" class="card-body" style="text-decoration: none;">
                     <div class="d-flex align-items-center mb-3">
-                        <img src="{{ $post->user->fotos->first()?->path ? asset('storage/'. $post->user->fotos->first()?->path) : asset('/images/profilePicture.png') }}"
-                            class="rounded-circle me-2" width="50" height="50" style="object-fit: cover;"
-                            id="preview" />
-                        <span class="fw-semibold">{{ '@' . $post->user->name }}</span>
+                      
                     </div>
 
                     <h6 class="fw-bold">
-                        {{ $post->title }}
+                        Post: {{ $comment->post->title}}
                     </h6>
 
-                    <div class="post-content text-muted small">
-                        {!! $post->description !!}
+                    <div class="comment-content small">
+                        {!! $comment->content !!}
                     </div>
 
-                    <small class="text-muted">{{ $post->created_at->format('d/m/Y') }}</small>
+                    <small class="text-muted">{{ $comment->created_at->format('d/m/Y') }}</small>
                 </a>
 
                 <div class="d-flex gap-2 pb-4 px-3">
-                    <form action="/admin/blog/{{ $post->id }}/reject" method="POST" style="display: inline;"
-                        onsubmit="return confirm('Tem certeza que deseja rejeitar este post?');">
+                    <form action="/admin/blog/{{ $comment->id }}/reject" method="POST" style="display: inline;"
+                        onsubmit="return confirm('Tem certeza que deseja rejeitar este comment?');">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-danger">
                             <i class="fa-solid fa-x"></i> Negar
                         </button>
                     </form>
 
-                    <form action="/admin/blog/{{ $post->id }}/accept" method="POST" style="display: inline;">
+                    <form action="/admin/blog/{{ $comment->id }}/accept" method="POST" style="display: inline;">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-success">
                             <i class="fas fa-check"></i> Aceitar

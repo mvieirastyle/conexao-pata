@@ -29,18 +29,35 @@ class PostController extends Controller
 
     public function show(): View
     {
-        $posts = Cache::remember($this->getPostsCacheKey(), now()->addHours(3), function () {
-            return Post::where('status', 'aprovado')->paginate(6)->withQueryString();
+        $data = Cache::remember($this->getPostsCacheKey(), now()->addHours(1), function () {
+            $posts = Post::where('status', 'aprovado')->paginate(6)->withQueryString();
+
+            return $posts;
         });
 
         return view('pages.blog.index', [
-            'posts' => $posts,
+            'posts' => $data,
             'user' => Auth::user(),
         ]);
     }
     public function showAdd(): View
     {
         return view('pages.blog.new_post');
+    }
+
+    public function add(Request $request, int $id)
+    {
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required',
+            'description' => 'required',
+        ]);
+
+        Post::createNew($request->all(), $id);
+
+        Cache::forget('posts_cache_version');
+
+        return redirect('/blog')->with('success', 'Sua publicação foi enviado com sucesso. Ela será postada assim que um administrador validar as sua informações. Obrigada pela contribuição!');
     }
 
     public function showPost(int $id)
@@ -71,21 +88,6 @@ class PostController extends Controller
             'comments' => $data['comments'],
             'shareLinks' => $shareLinks,
         ]);
-    }
-
-    public function add(Request $request, int $id)
-    {
-        $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'description' => 'required',
-        ]);
-
-        Post::createNew($request->all(), $id);
-
-        Cache::forget('posts_cache_version');
-
-        return redirect('/blog');
     }
 
     public function uploadImage(Request $request)
@@ -134,7 +136,8 @@ class PostController extends Controller
         return redirect('/blog')->with('success', 'Sua publicação foi editada com sucesso');
     }
 
-    public function showManagePost(){
+    public function showManagePost()
+    {
         $posts = Post::where('status', '!=', 'aprovado')->where('status', '!=', 'negado')->get();
 
         return view('pages.admin.blog.manage', [
@@ -146,7 +149,7 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $post->update([
             'status' => 'aprovado'
-            ]);
+        ]);
 
         Cache::forget('posts_cache_version');
 
@@ -156,11 +159,41 @@ class PostController extends Controller
     public function rejectPost(int $id)
     {
         $post = Post::findOrFail($id);
+
         $post->update([
             'status' => 'negado'
-            ]);
+        ]);
 
         Cache::forget('posts_cache_version');
 
         return redirect('/admin/blog/posts')->with('success', 'Post rejeitado com sucesso!');
-    }}
+    }
+
+    public function showManageComment(){
+        $comments = Comment::where('status', '!=', 'aprovado')->where('status', '!=', 'negado')->get();
+
+        return view('pages.admin.blog.manage-comment', [
+            'comments' => $comments,
+        ]);
+    }
+
+        public function acceptComment(int $id)
+    {
+        $comment = Comment::findOrFail($id);
+        $comment->update([
+            'status' => 'aprovado'
+        ]);
+
+        return redirect('/admin/blog/comments')->with('success', 'Comentario aprovado com sucesso!');
+    }
+
+    public function rejectComment(int $id)
+    {
+        $comment = Comment::findOrFail($id);
+        $comment->update([
+            'status'=> 'negado'
+            ]);
+       
+        return redirect('/admin/blog/comments')->with('success','Comentario negado com sucesso!');
+    }
+}
