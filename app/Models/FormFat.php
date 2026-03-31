@@ -20,6 +20,7 @@ class FormFat extends Model
         'residence_type',
         'accident_responsibility',
         'adaptation_terms',
+        'accept'
     ];
 
     protected $casts = [

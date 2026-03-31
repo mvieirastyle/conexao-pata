@@ -24,7 +24,7 @@
     </div>
 
     <div class="row g-4">
-        @foreach($posts as $post)
+        @forelse($posts as $post)
         <div class="col-md-6">
             <div class="card h-100 shadow-sm border-0" style="position: relative;">
                 <a href="/blog/post/{{ $post->id }}" class="card-body" style="text-decoration: none;">
@@ -47,7 +47,7 @@
                 </a>
 
                 <div class="d-flex gap-2 pb-4 px-3">
-                    <form action="/admin/blog/{{ $post->id }}/reject" method="POST" style="display: inline;"
+                    <form action="/admin/blog/{{ $post->id }}/post/reject" method="POST" style="display: inline;"
                         onsubmit="return confirm('Tem certeza que deseja rejeitar este post?');">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-danger">
@@ -55,7 +55,7 @@
                         </button>
                     </form>
 
-                    <form action="/admin/blog/{{ $post->id }}/accept" method="POST" style="display: inline;">
+                    <form action="/admin/blog/{{ $post->id }}/post/accept" method="POST" style="display: inline;">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-success">
                             <i class="fas fa-check"></i> Aceitar
@@ -64,7 +64,17 @@
                 </div>
             </div>
         </div>
-        @endforeach
+        @empty
+        <div class="col-12">
+            <div class="card text-center shadow-sm border-0 p-5">
+                <i class="fas fa-newspaper fa-3x mb-3 text-muted"></i>
+                <h5 class="text-muted">Nenhuma postagem encontrada</h5>
+                <p class="text-muted mb-0">
+                    Quando houver posts para revisão, eles aparecerão aqui.
+                </p>
+            </div>
+        </div>
+        @endforelse
     </div>
 
 </div>

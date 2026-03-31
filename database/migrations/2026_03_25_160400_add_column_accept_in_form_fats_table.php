@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('post_tag', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('post_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('tag_id')->constrained()->cascadeOnDelete();
-            $table->unique(['post_id', 'tag_id']);
+        Schema::table('form_fats', function (Blueprint $table) {
+            $table->boolean('accept')->default(0);
         });
     }
 
@@ -24,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('post_tag');
+        Schema::table('form_fats', function (Blueprint $table) {
+            $table->dropColumn('accept');
+        });
     }
 };

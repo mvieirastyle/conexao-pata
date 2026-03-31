@@ -36,9 +36,13 @@ Route::get('/form-adoption/{id}', [FormsController::class, 'showAdoptionForm']);
 
 Route::post('/form-adoption/{id}', [FormsController::class, 'sendAdoptionForm']);
 
-Route::get('/donate', function () {return view('pages.donate');});
+Route::get('/donate', function () {
+    return view('pages.donate');
+});
 
-Route::get('/volunteer', function () {return view('pages.volunteer');});
+Route::get('/volunteer', function () {
+    return view('pages.volunteer');
+});
 
 Route::get('/form-volunteer', [FormsController::class, 'showVolunteerForm']);
 
@@ -76,7 +80,7 @@ Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $requ
     return redirect('/');
 })->middleware(['auth', 'signed'])->name('verification.verify');;
 
-Route::post('/email/verification-notification', function (Request $request) {
+Route::post('/email/verification-notification', function () {
     $user = session('user');
     $user->sendEmailVerificationNotification();
     return back()->with('message', 'Verification link sent!');
@@ -147,11 +151,11 @@ Route::middleware('admin')->group(function () {
 
         Route::prefix('blog')->group(function () {
             Route::get('/posts', [PostController::class, 'showManagePost']);
-            Route::post('/{id}/accept', [PostController::class, 'acceptPost']);
-            Route::post('/{id}/reject', [PostController::class, 'rejectPost']);
-            Route::get('/comments', [PostController::class,'showManageComment']);
-            Route::post('/{id}/accept', [PostController::class, 'acceptComment']);
-            Route::post('/{id}/reject', [PostController::class, 'rejectComment']);
+            Route::post('/{id}/post/accept', [PostController::class, 'acceptPost']);
+            Route::post('/{id}/post/reject', [PostController::class, 'rejectPost']);
+            Route::get('/comments', [PostController::class, 'showManageComment']);
+            Route::post('/{id}/comment/accept', [PostController::class, 'acceptComment']);
+            Route::post('/{id}/comment/reject', [PostController::class, 'rejectComment']);
         });
 
 
@@ -166,10 +170,26 @@ Route::middleware('admin')->group(function () {
 
         Route::prefix('animal')->group(function () {
             Route::get('/list', [AnimalController::class, 'show']);
-            Route::get('/adoption-requests', [AnimalController::class, 'showAdoptionRequests']);
+
+            Route::middleware(['auth'])->group(function () {
+                Route::get('/adoption-requests', [AnimalController::class, 'showAdoptionRequests']);
+                Route::get('/volunteer-requests', [FormsController::class, 'showVolunteerRequests']);
+                Route::get('/fat-requests', [FormsController::class,  'showFatRequests']);
+            });
+
             Route::get('/adoption-requests/{id}', [AnimalController::class, 'showAdoptionRequest']);
             Route::post('/adoption-requests/{id}/reject', [AnimalController::class, 'rejectAdoption']);
             Route::post('/adoption-requests/{id}/accept', [AnimalController::class, 'acceptAdoption']);
+
+           
+            Route::get('/volunteer-requests/{id}', [FormsController::class, 'showVolunteersRequests']);
+            Route::post('/volunteer-requests/{id}/reject', [FormsController::class, 'rejectVolunteer']);
+            Route::post('/volunteer-requests/{id}/accept', [FormsController::class, 'acceptVolunteer']);
+
+            Route::get('/fat-requests/{id}', [FormsController::class, 'showFatRequest']);
+            Route::post('/fat-requests/{id}/reject', [FormsController::class, 'rejectFat']);
+            Route::post('/fat-requests/{id}/accept', [FormsController::class, 'acceptFat']);
+
             Route::get('/edit/{id}', [AnimalController::class, 'showEdit']);
             Route::post('/edit/{id}', [AnimalController::class, 'update']);
             Route::get('/add', [AnimalController::class, 'showAdd']);

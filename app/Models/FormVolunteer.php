@@ -25,7 +25,8 @@ class FormVolunteer extends Model
         'activities',
         'courses',
         'accident_responsibility',
-        'adaptation_terms'
+        'adaptation_terms',
+        'accept'
     ];
 
     protected $casts = [

@@ -21,11 +21,13 @@ if (session_status() === PHP_SESSION_NONE) {
     <!-- Custom CSS Quill -->
     <link href="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.snow.css" rel="stylesheet" />
     @vite('resources/css/style.css')
+    @vite('resources/js/loader.js')
+  
 </head>
 <script src="https://cdn.jsdelivr.net/npm/quill@2.0.2/dist/quill.js"></script>
+ 
 <body>
     @include('partials.header')
-
 <main>
     @yield('content')
 </main>

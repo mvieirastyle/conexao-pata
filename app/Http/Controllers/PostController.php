@@ -55,7 +55,7 @@ class PostController extends Controller
 
         Post::createNew($request->all(), $id);
 
-        Cache::forget('posts_cache_version');
+        Cache::forget($this->getPostsCacheKey());
 
         return redirect('/blog')->with('success', 'Sua publicação foi enviado com sucesso. Ela será postada assim que um administrador validar as sua informações. Obrigada pela contribuição!');
     }
@@ -108,7 +108,7 @@ class PostController extends Controller
     {
         Post::deletePost($id);
 
-        Cache::forget('posts_cache_version');
+        Cache::forget($this->getPostsCacheKey());
 
         return redirect('/blog');
     }
@@ -131,7 +131,7 @@ class PostController extends Controller
 
         Post::updatePost($id, $request->all());
 
-        Cache::forget('posts_cache_version');
+        Cache::forget($this->getPostsCacheKey());
 
         return redirect('/blog')->with('success', 'Sua publicação foi editada com sucesso');
     }
@@ -147,24 +147,26 @@ class PostController extends Controller
     public function acceptPost(int $id)
     {
         $post = Post::findOrFail($id);
+
         $post->update([
             'status' => 'aprovado'
         ]);
 
-        Cache::forget('posts_cache_version');
+        Cache::forget($this->getPostsCacheKey());
 
         return redirect('/admin/blog/posts')->with('success', 'Post aprovado com sucesso!');
     }
 
     public function rejectPost(int $id)
     {
+        dd('kk');
         $post = Post::findOrFail($id);
 
         $post->update([
             'status' => 'negado'
         ]);
 
-        Cache::forget('posts_cache_version');
+        Cache::forget($this->getPostsCacheKey());
 
         return redirect('/admin/blog/posts')->with('success', 'Post rejeitado com sucesso!');
     }

@@ -30,8 +30,8 @@
                         <li><a class="dropdown-item" href="/admin/users/list">{{__('animal.users')}}</a></li>
                     </ul>
                 </li>
-    
-                     <li class="nav-item dropdown">
+
+                <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Gerir Blog
@@ -41,9 +41,17 @@
                         <li><a class="dropdown-item" href="/admin/blog/comments">Gerir Comentarios</a></li>
                     </ul>
                 </li>
-    
-                <li class="nav-item">
-                    <a class="nav-link" href="/admin/animal/adoption-requests">Pedidos de Adoção</a>
+
+                        <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Pedidos
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/admin/animal/adoption-requests">Pedidos de Adoção</a></li>
+                        <li><a class="dropdown-item" href="/admin/animal/volunteer-requests">Pedidos de Voluntariado</a></li>
+                        <li><a class="dropdown-item" href="/admin/animal/fat-requests">Pedidos de FAT</a></li>
+                    </ul>
                 </li>
 
                 @auth

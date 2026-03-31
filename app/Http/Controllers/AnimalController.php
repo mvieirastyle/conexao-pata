@@ -135,7 +135,7 @@ class AnimalController extends Controller
 
         Animal::createNew($request->all());
 
-        Cache::increment('animals_cache_version');
+        Cache::increment($this->getAnimalsCacheKey());
 
         return redirect('/admin/animal/list')->with('success', 'Animal adicionado com sucesso');
     }
@@ -164,7 +164,7 @@ class AnimalController extends Controller
 
         Animal::updateAnimal($id, $request->all());
 
-        Cache::increment('animals_cache_version');
+        Cache::increment($this->getAnimalsCacheKey());
 
         return redirect('/admin/animal/list')->with('success', 'Animal editado com sucesso');
     }
@@ -173,7 +173,7 @@ class AnimalController extends Controller
     {
         Animal::deleteAnimal($id);
 
-        Cache::increment('animals_cache_version');
+        Cache::increment($this->getAnimalsCacheKey());
 
         return redirect('/admin/animal/list')->with('success', 'Animal removido com sucesso');
     }

@@ -13,6 +13,7 @@ class FormContact extends Model
         'email',
         'subject',
         'message',
+        'accept'
     ];
 
     public static function createNew(array $data = [])

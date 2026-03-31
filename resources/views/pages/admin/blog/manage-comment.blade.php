@@ -24,12 +24,12 @@
     </div>
 
     <div class="row g-4">
-        @foreach($comments->where('status', 'pendente') as $comment)
+        @forelse($comments->where('status', 'pendente') as $comment)
         <div class="col-md-6">
             <div class="card h-100 shadow-sm border-0" style="position: relative;">
                 <a href="/blog/comment/{{ $comment->id }}" class="card-body" style="text-decoration: none;">
                     <div class="d-flex align-items-center mb-3">
-                      
+
                     </div>
 
                     <h6 class="fw-bold">
@@ -44,7 +44,7 @@
                 </a>
 
                 <div class="d-flex gap-2 pb-4 px-3">
-                    <form action="/admin/blog/{{ $comment->id }}/reject" method="POST" style="display: inline;"
+                    <form action="/admin/blog/{{ $comment->id }}/comment/reject" method="POST" style="display: inline;"
                         onsubmit="return confirm('Tem certeza que deseja rejeitar este comment?');">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-danger">
@@ -52,7 +52,7 @@
                         </button>
                     </form>
 
-                    <form action="/admin/blog/{{ $comment->id }}/accept" method="POST" style="display: inline;">
+                    <form action="/admin/blog/{{ $comment->id }}/comment/accept" method="POST" style="display: inline;">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-success">
                             <i class="fas fa-check"></i> Aceitar
@@ -61,7 +61,17 @@
                 </div>
             </div>
         </div>
-        @endforeach
+        @empty
+        <div class="col-12">
+            <div class="card text-center shadow-sm border-0 p-5">
+                <i class="fas fa-comments fa-3x mb-3 text-muted"></i>
+                <h5 class="text-muted">Nenhum comentário pendente</h5>
+                <p class="text-muted mb-0">
+                    Quando houver comentários para aprovação, eles aparecerão aqui.
+                </p>
+            </div>
+        </div>
+        @endforelse
     </div>
 
 </div>

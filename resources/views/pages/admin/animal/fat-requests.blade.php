@@ -22,7 +22,7 @@
     </div>
     @endif
 
-    <form method="GET" class="mb-1 align-items-start" action="/admin/animal/adoption-requests">
+    <form method="GET" class="mb-1 align-items-start" action="/admin/animal/fat-requests">
 
         <input type="hidden" name="tab" value="{{ $activeTab }}">
 
@@ -75,7 +75,7 @@
         <div class="tab-pane fade {{ $activeTab === 'pendentes' ? 'show active' : '' }}" id="home-tab-pane">
             <div class="card-header bg-dark text-white py-2 d-flex justify-content-between align-items-center">
                 <div>
-                    <h5 class="mb-0">Pedidos Pendentes de Adoção</h5>
+                    <h5 class="mb-0">Pedidos Pendentes de FAT</h5>
                 </div>
             </div>
 
@@ -89,43 +89,38 @@
                                     <th>Nome do Candidato</th>
                                     <th>Email</th>
                                     <th>Telefone</th>
-                                    <th>Animal</th>
                                     <th>Data Nascimento</th>
-                                    <th>Criado em</th>
                                     <th>Estado</th>
                                     <th class="text-end">Informações</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($formAdoptions->filter(fn($item) => $item->accept == 0) as $request)
+                                @forelse ($formFat->filter(fn($item) => $item->accept == 0) as $request)
                                 <tr>
                                     <td>#{{ $request->id }}</td>
                                     <td>{{ $request->full_name }}</td>
                                     <td>{{ $request->email }}</td>
                                     <td>{{ $request->phone }}</td>
-                                    <td><a href="/admin/animal/edit/{{ $request->animal_id }}">{{
-                                            $request->animal?->nome ?? '---' }}</a></td>
                                     <td>{{ $request->birth_date ?
                                         \Illuminate\Support\Carbon::parse($request->birth_date)->format('d/m/Y') : '-'
                                         }}</td>
-                                    <td>{{ $request->created_at ? $request->created_at->format('d/m/Y') : '-' }}</td>
                                     <td> @if ($request->accept)
                                         <span class="badge bg-success">Aceito</span>
                                         @else
-                                        <span class="badge bg-secondary">Esperando</span>
+                                        <span class="badge bg-secondary">Pendente</span>
                                         @endif
                                     </td>
 
                                     </td>
                                     <td class="text-end">
-                                        <a href="/admin/animal/adoption-requests/{{ $request->id }}"
+                                        <a href="/admin/animal/fat-requests/{{ $request->id }}"
                                             class="btn btn-sm btn-primary me-1" title="Informações"><i
                                                 class="fa-solid fa-circle-info"></i></a>
                                     </td>
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="9" class="text-center py-4">Nenhum pedido de adoção encontrado.</td>
+                                    <td colspan="9" class="text-center py-4">Nenhum pedido de FAT encontrado.</td>
                                 </tr>
                                 @endforelse
                             </tbody>
@@ -134,14 +129,14 @@
                 </div>
             </div>
             <div class="mt-3 align-items-end justify-content-end d-flex">
-                {{ $formAdoptions->links() }}
+                {{ $formFat->links() }}
             </div>
         </div>
     </div>
     <div class="tab-pane fade {{ $activeTab === 'aceitos' ? 'show active' : '' }}" id="accept-tab-pane">
         <div class="card-header bg-dark text-white py-2 d-flex justify-content-between align-items-center">
             <div>
-                <h5 class="mb-0">Pedidos Aceitos de Adoção</h5>
+                <h5 class="mb-0">Pedidos Aceitos de FAT</h5>
             </div>
         </div>
 
@@ -155,43 +150,38 @@
                                 <th>Nome do Candidato</th>
                                 <th>Email</th>
                                 <th>Telefone</th>
-                                <th>Animal</th>
                                 <th>Data Nascimento</th>
-                                <th>Criado em</th>
                                 <th>Estado</th>
                                 <th class="text-end">Informações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($formAdoptions->filter(fn($item) => $item->accept == 1) as $request)
+                            @forelse ($formFat->filter(fn($item) => $item->accept == 1) as $request)
                             <tr>
                                 <td>#{{ $request->id }}</td>
                                 <td>{{ $request->full_name }}</td>
                                 <td>{{ $request->email }}</td>
                                 <td>{{ $request->phone }}</td>
-                                <td><a href="/admin/animal/edit/{{ $request->animal_id }}">{{ $request->animal?->nome ??
-                                        '---' }}</a></td>
                                 <td>{{ $request->birth_date ?
                                     \Illuminate\Support\Carbon::parse($request->birth_date)->format('d/m/Y') : '-' }}
                                 </td>
-                                <td>{{ $request->created_at ? $request->created_at->format('d/m/Y') : '-' }}</td>
                                 <td> @if ($request->accept === 1)
                                     <span class="badge bg-success">Aceito</span>
                                     @else
-                                    <span class="badge bg-secondary">Esperando</span>
+                                    <span class="badge bg-secondary">Pendente</span>
                                     @endif
                                 </td>
 
                                 </td>
                                 <td class="text-end">
-                                    <a href="/admin/animal/adoption-requests/{{ $request->id }}"
+                                    <a href="/admin/animal/volunteer-requests/{{ $request->id }}"
                                         class="btn btn-sm btn-primary me-1" title="Informações"><i
                                             class="fa-solid fa-circle-info"></i></a>
                                 </td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="9" class="text-center py-4">Nenhum pedido de adoção encontrado.</td>
+                                <td colspan="9" class="text-center py-4">Nenhum pedido de FAT encontrado.</td>
                             </tr>
                             @endforelse
                         </tbody>
@@ -200,7 +190,7 @@
             </div>
         </div>
         <div class="mt-3 align-items-end justify-content-end d-flex">
-            {{ $formAdoptions->links() }}
+            {{ $formFat->links() }}
         </div>
     </div>
 </div>
@@ -212,14 +202,17 @@
         const tabButtons = document.querySelectorAll('#myTab button[data-bs-toggle="tab"]');
 
         tabButtons.forEach(button => {
-           button.addEventListener('shown.bs.tab', event => {
-            const tabKey = event.target.id === 'accept-tab' ? 'aceitos' : 'pendentes';
+            button.addEventListener('shown.bs.tab', event => {
+                const tabKey = event.target.id === 'accept-tab' ? 'aceitos' : 'pendentes';
 
-            const url = new URL(window.location);
-            url.searchParams.set('tab', tabKey);
+                if (tabInput) {
+                    tabInput.value = tabKey;
+                }
 
-            window.location.href = url.toString(); 
-        });
+                const url = new URL(window.location);
+                url.searchParams.set('tab', tabKey);
+                window.history.replaceState({}, '', url);
+            });
         });
 
         const url = new URL(window.location);

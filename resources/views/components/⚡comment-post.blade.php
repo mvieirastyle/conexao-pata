@@ -62,7 +62,7 @@ public function deleteReplies(Comment $comment)
 };
 ?>
 
-<div class="mt-5">
+<div class="mt-5" wire:poll.1s>
 
     <h4 class="mb-4 fw-bold">{{__('blog.post.comments')}}</h4>
 

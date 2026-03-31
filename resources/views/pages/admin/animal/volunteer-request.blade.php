@@ -64,6 +64,8 @@
                 data-bs-target="#home-tab-pane" type="button">
                 Pendentes
             </button>
+
+            <div id="loader" class="loader" style="display: none;"></div>
         </li>
         <li class="nav-item" role="presentation">
             <button class="nav-link {{ $activeTab === 'aceitos' ? 'active' : '' }}" id="accept-tab" data-bs-toggle="tab"
@@ -75,7 +77,7 @@
         <div class="tab-pane fade {{ $activeTab === 'pendentes' ? 'show active' : '' }}" id="home-tab-pane">
             <div class="card-header bg-dark text-white py-2 d-flex justify-content-between align-items-center">
                 <div>
-                    <h5 class="mb-0">Pedidos Pendentes de Adoção</h5>
+                    <h5 class="mb-0">Pedidos Pendentes de voluntariado</h5>
                 </div>
             </div>
 
@@ -89,26 +91,21 @@
                                     <th>Nome do Candidato</th>
                                     <th>Email</th>
                                     <th>Telefone</th>
-                                    <th>Animal</th>
                                     <th>Data Nascimento</th>
-                                    <th>Criado em</th>
                                     <th>Estado</th>
                                     <th class="text-end">Informações</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($formAdoptions->filter(fn($item) => $item->accept == 0) as $request)
+                                @forelse ($formVolunteers->filter(fn($item) => $item->accept == 0) as $request)
                                 <tr>
                                     <td>#{{ $request->id }}</td>
                                     <td>{{ $request->full_name }}</td>
                                     <td>{{ $request->email }}</td>
                                     <td>{{ $request->phone }}</td>
-                                    <td><a href="/admin/animal/edit/{{ $request->animal_id }}">{{
-                                            $request->animal?->nome ?? '---' }}</a></td>
                                     <td>{{ $request->birth_date ?
                                         \Illuminate\Support\Carbon::parse($request->birth_date)->format('d/m/Y') : '-'
                                         }}</td>
-                                    <td>{{ $request->created_at ? $request->created_at->format('d/m/Y') : '-' }}</td>
                                     <td> @if ($request->accept)
                                         <span class="badge bg-success">Aceito</span>
                                         @else
@@ -118,14 +115,15 @@
 
                                     </td>
                                     <td class="text-end">
-                                        <a href="/admin/animal/adoption-requests/{{ $request->id }}"
+                                        <a href="/admin/animal/volunteer-requests/{{ $request->id }}"
                                             class="btn btn-sm btn-primary me-1" title="Informações"><i
                                                 class="fa-solid fa-circle-info"></i></a>
                                     </td>
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="9" class="text-center py-4">Nenhum pedido de adoção encontrado.</td>
+                                    <td colspan="9" class="text-center py-4">Nenhum pedido de voluntariado encontrado.
+                                    </td>
                                 </tr>
                                 @endforelse
                             </tbody>
@@ -134,14 +132,14 @@
                 </div>
             </div>
             <div class="mt-3 align-items-end justify-content-end d-flex">
-                {{ $formAdoptions->links() }}
+                {{ $formVolunteers->links() }}
             </div>
         </div>
     </div>
     <div class="tab-pane fade {{ $activeTab === 'aceitos' ? 'show active' : '' }}" id="accept-tab-pane">
         <div class="card-header bg-dark text-white py-2 d-flex justify-content-between align-items-center">
             <div>
-                <h5 class="mb-0">Pedidos Aceitos de Adoção</h5>
+                <h5 class="mb-0">Pedidos Aceitos de voluntariado</h5>
             </div>
         </div>
 
@@ -155,43 +153,38 @@
                                 <th>Nome do Candidato</th>
                                 <th>Email</th>
                                 <th>Telefone</th>
-                                <th>Animal</th>
                                 <th>Data Nascimento</th>
-                                <th>Criado em</th>
                                 <th>Estado</th>
                                 <th class="text-end">Informações</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($formAdoptions->filter(fn($item) => $item->accept == 1) as $request)
+                            @forelse ($formVolunteers->filter(fn($item) => $item->accept == 1) as $request)
                             <tr>
                                 <td>#{{ $request->id }}</td>
                                 <td>{{ $request->full_name }}</td>
                                 <td>{{ $request->email }}</td>
                                 <td>{{ $request->phone }}</td>
-                                <td><a href="/admin/animal/edit/{{ $request->animal_id }}">{{ $request->animal?->nome ??
-                                        '---' }}</a></td>
                                 <td>{{ $request->birth_date ?
                                     \Illuminate\Support\Carbon::parse($request->birth_date)->format('d/m/Y') : '-' }}
                                 </td>
-                                <td>{{ $request->created_at ? $request->created_at->format('d/m/Y') : '-' }}</td>
                                 <td> @if ($request->accept === 1)
-                                    <span class="badge bg-success">Aceito</span>
+                                    <span class="badge bg-success">Aceitos</span>
                                     @else
-                                    <span class="badge bg-secondary">Esperando</span>
+                                    <span class="badge bg-secondary">Pendentes</span>
                                     @endif
                                 </td>
 
                                 </td>
                                 <td class="text-end">
-                                    <a href="/admin/animal/adoption-requests/{{ $request->id }}"
+                                    <a href="/admin/animal/volunteer-requests/{{ $request->id }}"
                                         class="btn btn-sm btn-primary me-1" title="Informações"><i
                                             class="fa-solid fa-circle-info"></i></a>
                                 </td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="9" class="text-center py-4">Nenhum pedido de adoção encontrado.</td>
+                                <td colspan="9" class="text-center py-4">Nenhum pedido de voluntariado encontrado.</td>
                             </tr>
                             @endforelse
                         </tbody>
@@ -200,7 +193,7 @@
             </div>
         </div>
         <div class="mt-3 align-items-end justify-content-end d-flex">
-            {{ $formAdoptions->links() }}
+            {{ $formVolunteers->links() }}
         </div>
     </div>
 </div>
