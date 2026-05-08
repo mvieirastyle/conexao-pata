@@ -72,7 +72,7 @@
                     <button type="button" class="btn-close bg-dark" data-bs-dismiss="modal" aria-label="Close"
                         style="position:absolute; top:5px; right:5px;"></button>
 
-                    <img src="" alt="Imagem" class="img-fluid" id="modalImgageViewIMG">
+                    <img src="" alt="Picture" class="img-fluid" id="modalImgageViewIMG">
                 </div>
             </div>
         </div>

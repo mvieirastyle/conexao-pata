@@ -45,7 +45,7 @@
                                 <div class="position-relative" style="width:150px; height:150px;">
 
                                     <img src="{{ $user->fotos->first()?->path ? asset('storage/'. $user->fotos->first()?->path) : asset('/images/profilePicture.png') }}"
-                                        class="rounded-circle object-fit-cover w-100 h-100" id="preview">
+                                        class="rounded-circle object-fit-cover w-100 h-100" id="preview" alt="Picture">
 
                                     <div class="position-absolute top-0 start-0 w-100 h-100 
                                     d-flex align-items-center justify-content-center

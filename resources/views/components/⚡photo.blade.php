@@ -66,7 +66,7 @@ new class extends Component
                         <button type="button" wire:click="removeFotoStorage({{ $foto->id }})" class="btn-close position-absolute top-0 end-0 m-2 bg-white rounded-square p-2" aria-label="Excluir">
                         </button>
                         <img src="{{Storage::url($foto->path)}}"
-                        style="height: 190px; width: 135px; object-fit: cover; border-radius: 5px ;">
+                        style="height: 190px; width: 135px; object-fit: cover; border-radius: 5px ;" alt="Picture">
                     </div>
                 @endforeach
                @foreach($this->fotos as $file)
@@ -74,7 +74,7 @@ new class extends Component
                     <button type="button" wire:click="removeFoto({{ $loop->index }})" class="btn-close position-absolute top-0 end-0 m-2 bg-white rounded-square p-2" aria-label="Excluir">
                     </button>
                     <img src="{{$file->temporaryUrl()}}"
-                        style="height: 190px; width: 135px; object-fit: cover; border-radius: 5px ;">
+                        style="height: 190px; width: 135px; object-fit: cover; border-radius: 5px ;" alt="Picture">
                 </div>
             @endforeach      
                 <input type="hidden" name="new_fotos" value="{{json_encode($this->foto_path)}}">

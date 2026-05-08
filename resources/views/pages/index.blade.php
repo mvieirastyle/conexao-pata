@@ -27,7 +27,7 @@
             <div class="col-md-6 text-center">
                 <!-- Placeholder for an image -->
                 <img src="images/imgIndex.png" alt="Cachorro Canil"
-                    class="img-fluid rounded shadow-lg mt-4 mt-md-0">
+                    class="img-fluid rounded shadow-lg mt-4 mt-md-0" alt="Cachorro no Canil">
             </div>
         </div>
     </div>

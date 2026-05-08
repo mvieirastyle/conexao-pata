@@ -19,7 +19,7 @@
     <div class="d-flex align-items-start">
         <img src="{{ $comment->user->fotos->first()?->path 
                     ? asset('storage/'.$comment->user->fotos->first()->path) 
-                    : asset('/images/profilePicture.png') }}" class="forum-avatar me-3" />
+                    : asset('/images/profilePicture.png') }}" class="forum-avatar me-3" alt="Picture"/>
         <div class="flex-grow-1">
             <div class="d-flex justify-content-between align-items-center mb-1">
                 <span class="fw-semibold text-dark">{{ '@'.$comment->user->name }}</span>

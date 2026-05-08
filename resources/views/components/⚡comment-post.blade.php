@@ -71,7 +71,7 @@ public function deleteReplies(Comment $comment)
         <div class="d-flex align-items-start">
             <img src="{{ auth()->user()->fotos->first()?->path 
                             ? asset('storage/'.auth()->user()->fotos->first()->path) 
-                            : asset('/images/profilePicture.png') }}" class="forum-avatar me-3" />
+                            : asset('/images/profilePicture.png') }}" class="forum-avatar me-3" alt="Picture"/>
             
             <div class="flex-grow-1">
                 <textarea wire:model="comment.post" rows="3" class="form-control forum-textarea mb-2"

@@ -26,7 +26,7 @@
         <div class="row align-items-center mb-5">
             <div class="col-md-6 order-md-2">
                 <img src="images/DonateDog.jpg" class="img-fluid rounded shadow"
-                    alt="Batalha Landscape">
+                    alt="Batalha Picture">
             </div>
             <div class="col-md-6 order-md-1">
                 <h3 class="section-title">{{ __('donate.how_to_donate_title') }}</h3>

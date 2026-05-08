@@ -31,7 +31,7 @@
                     <div class="d-flex align-items-center mb-3">
                         <img src="{{ $post->user->fotos->first()?->path ? asset('storage/'. $post->user->fotos->first()?->path) : asset('/images/profilePicture.png') }}"
                             class="rounded-circle me-2" width="50" height="50" style="object-fit: cover;"
-                            id="preview" />
+                            id="preview" alt="User Picture" />
                         <span class="fw-semibold">{{ '@' . $post->user->name }}</span>
                     </div>
 

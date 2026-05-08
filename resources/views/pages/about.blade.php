@@ -25,7 +25,7 @@
         <div class="row align-items-center mb-5">
             <div class="col-md-6 order-md-2">
                 <img src="images/imgAbout.png" class="img-fluid rounded shadow"
-                    alt="Batalha Landscape">
+                    alt="Batalha Picture">
             </div>
             <div class="col-md-6 order-md-1">
                 <h3 class="section-title">{{__('front_end.about.mission')}}</h3>
