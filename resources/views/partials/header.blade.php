@@ -62,7 +62,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="/profile">{{__('front_end.header.edit_profile')}}</a></li>
-                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                        <li><a class="dropdown-item" style="color: red;" href="/logout"><i class="fa-solid fa-arrow-right-from-bracket" style="color: rgb(255, 0, 0);"></i> Logout</a></li>
                     </ul>
                 </li>
                 @endif
