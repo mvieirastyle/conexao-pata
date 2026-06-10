@@ -34,23 +34,23 @@
                 <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Gerir Blog
+                        {{__('animal.header.manage_blog')}}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/admin/blog/posts">Gerir Posts</a></li>
-                        <li><a class="dropdown-item" href="/admin/blog/comments">Gerir Comentarios</a></li>
+                        <li><a class="dropdown-item" href="/admin/blog/posts">{{__('animal.header.manage_posts')}}</a></li>
+                        <li><a class="dropdown-item" href="/admin/blog/comments">{{__('animal.header.manage_comments')}}</a></li>
                     </ul>
                 </li>
 
                         <li class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        Pedidos
+                        {{__('animal.header.orders_list')}}
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/admin/animal/adoption-requests">Pedidos de Adoção</a></li>
-                        <li><a class="dropdown-item" href="/admin/animal/volunteer-requests">Pedidos de Voluntariado</a></li>
-                        <li><a class="dropdown-item" href="/admin/animal/fat-requests">Pedidos de FAT</a></li>
+                        <li><a class="dropdown-item" href="/admin/animal/adoption-requests">{{__('animal.header.orders_adoption')}}</a></li>
+                        <li><a class="dropdown-item" href="/admin/animal/volunteer-requests">{{__('animal.header.orders_vollunteers')}}</a></li>
+                        <li><a class="dropdown-item" href="/admin/animal/fat-requests">{{__('animal.header.orders_fat')}}</a></li>
                     </ul>
                 </li>
 
@@ -73,8 +73,8 @@
                         <x-heroicon-o-language style="width:23px; height:23px;" />
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/language/en">en</a></li>
-                        <li><a class="dropdown-item" href="/language/pt">pt</a></li>
+                        <li><a class="dropdown-item" href="/language/en">EN 🇺🇸</a></li>
+                        <li><a class="dropdown-item" href="/language/pt">PT 🇵🇹</a></li>
                     </ul>
                 </li>
 

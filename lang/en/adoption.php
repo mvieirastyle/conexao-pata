@@ -50,6 +50,11 @@ return [
     'term_responsibility' => 'I declare that I assume full responsibility for the care, feeding, safety, and well-being of the adopted animal, committing to follow all shelter rules and provide adequate attention to the animal.',
 
     'submit_button' => 'Submit pre-adoption',
+    'reject_request' => 'Reject request',
+    'accept_request' => 'Accept request',
+    'pending_requests' => 'Pending Adoption Requests',
+    'accepted_requests' => 'Accepted Adoption Requests',
+    'empty_requests' => 'No adoption requests found.',
 ];
 
 ?>

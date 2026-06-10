@@ -45,13 +45,13 @@
 
             <div class="input-group">
                 <div class="input-group-text"><i class="fa-solid fa-at"></i></div>
-                <input type="text" class="form-control" placeholder="Username" name="name"
+                <input type="text" class="form-control" placeholder="{{ __('common.username_placeholder') }}" name="name"
                     value="{{ request('name') }}">
             </div>
 
             <div class="input-group">
                 <div class="input-group-text"><i class="fa-solid fa-envelope"></i></div>
-                <input type="text" class="form-control" placeholder="Email" name="email" value="{{ request('email') }}">
+                <input type="text" class="form-control" placeholder="{{ __('common.email_placeholder') }}" name="email" value="{{ request('email') }}">
             </div>
 
             <a href="{{ url()->current() }}" class="btn btn-outline-light">
@@ -108,12 +108,12 @@
 
                             <td class="text-end">
                                 <a href="/admin/users/edit/{{$user->id}}" class="btn btn-sm btn-primary me-1"
-                                    title="Editar"><i class="fas fa-edit"></i></a>
+                                    title="{{ __('common.edit') }}"><i class="fas fa-edit"></i></a>
 
                                 <form action="/admin/users/delete/{{$user->id}}" method="POST" class="d-inline"
-                                    onsubmit="return confirm('Tem certeza que deseja eliminar este utilizador?');">
+                                    onsubmit="return confirm('{{ __('users.confirmed') }}');">
                                     @csrf
-                                    <button type="submit" class="btn btn-sm btn-danger" title="Eliminar">
+                                    <button type="submit" class="btn btn-sm btn-danger" title="{{ __('common.delete') }}">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
@@ -121,7 +121,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="7" class="text-center py-4">Nenhum utilizador encontrado.</td>
+                            <td colspan="7" class="text-center py-4">{{ __('users.empty_users') }}</td>
                         </tr>
                         @endforelse
                     </tbody>

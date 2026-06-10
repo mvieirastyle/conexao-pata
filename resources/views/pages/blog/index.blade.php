@@ -80,7 +80,7 @@
         </div>
         @empty
         <p class="text-muted">
-            O blog ainda não tem nenhum post
+            {{ __('blog.index.empty_posts') }}
         </p>
         @endforelse
     </div>

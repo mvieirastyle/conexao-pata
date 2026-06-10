@@ -106,7 +106,17 @@ return [
     'residence_apartment' => 'Apartment',
     'residence_house' => 'House',
     'residence_farm' => 'Farm',
+
+    'reject_fat_request' => 'Reject FAT request',
+    'accept_fat_request' => 'Accept FAT request',
+    'reject_volunteer_request' => 'Reject volunteer request',
+    'accept_volunteer_request' => 'Accept volunteer request',
+    'pending_fat_requests' => 'Pending FAT Requests',
+    'accepted_fat_requests' => 'Accepted FAT Requests',
+    'empty_fat_requests' => 'No FAT requests found.',
+    'pending_volunteer_requests' => 'Pending Volunteer Requests',
+    'accepted_volunteer_requests' => 'Accepted Volunteer Requests',
+    'empty_volunteer_requests' => 'No volunteer requests found.',
 ];
 
 ?>
-

@@ -5,7 +5,7 @@
 <div class="container py-5">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1><i class="fa-solid fa-chart-line"></i> Dashboard Area</h1>
+        <h1><i class="fa-solid fa-chart-line"></i> {{ __('common.dashboard_area') }}</h1>
     </div>
 
     <div class="charts-wrapper row">
@@ -13,18 +13,18 @@
             <div class="chart-card">
                 <form method="GET" class="filter-form">
                     <div>
-                        <label>Data Inicial:</label>
+                        <label>{{__('common.inicial_date')}}:</label>
                         <input type="date" name="start_date" value="{{ request('start_date') }}">
                     </div>
 
                     <div>
-                        <label>Data Final:</label>
+                        <label>{{__('common.final_date')}}:</label>
                         <input type="date" name="end_date" value="{{ request('end_date') }}">
                     </div>
 
                     <div>
                         <button type="submit" class="btn btn-success btn-sm">
-                            Filtrar
+                            {{__('common.search')}}
                         </button>
                     </div>
                 </form>
@@ -33,10 +33,10 @@
 
                 <div>
                     <a href="adocoes-excel" class="btn btn-sm">
-                        <i class="fa-regular fa-file-excel"></i> Export Excel
+                        <i class="fa-regular fa-file-excel"></i> {{ __('common.export_excel') }}
                     </a>
                     <a href="adocoes-pdf" class="btn btn-sm">
-                        <i class="fa-regular fa-file-pdf"></i> Export PDF
+                        <i class="fa-regular fa-file-pdf"></i> {{ __('common.export_pdf') }}
                     </a>
                 </div>
             </div>
@@ -48,10 +48,10 @@
 
                 <div>
                     <a href="microchips-excel" class="btn btn-sm">
-                        <i class="fa-regular fa-file-excel"></i> Export Excel
+                        <i class="fa-regular fa-file-excel"></i> {{ __('common.export_excel') }}
                     </a>
                     <a href="microchips-pdf" class="btn btn-sm">
-                        <i class="fa-regular fa-file-pdf"></i> Export PDF
+                        <i class="fa-regular fa-file-pdf"></i> {{ __('common.export_pdf') }}
                     </a>
                 </div>
 
@@ -62,10 +62,10 @@
 
                 <div>
                     <a href="animais-excel" class="btn btn-sm">
-                        <i class="fa-regular fa-file-excel"></i> Export Excel
+                        <i class="fa-regular fa-file-excel"></i> {{ __('common.export_excel') }}
                     </a>
                     <a href="animais-pdf" class="btn btn-sm">
-                        <i class="fa-regular fa-file-pdf"></i> Export PDF
+                        <i class="fa-regular fa-file-pdf"></i> {{ __('common.export_pdf') }}
                     </a>
                 </div>
 
@@ -77,18 +77,18 @@
 
                 <form method="GET" class="filter-form">
                     <div>
-                        <label>Data Inicial:</label>
+                        <label>{{__('common.inicial_date')}}:</label>
                         <input type="date" name="inicialDate" value="{{ request('inicialDate') }}">
                     </div>
 
                     <div>
-                        <label>Data Final:</label>
+                        <label>{{__('common.final_date')}}:</label>
                         <input type="date" name="lastDate" value="{{ request('lastDate') }}">
                     </div>
 
                     <div>
                         <button type="submit" class="btn btn-success btn-sm">
-                            Filtrar
+                            {{__('common.search')}}
                         </button>
                     </div>
                 </form>
@@ -97,10 +97,10 @@
 
                 <div>
                     <a href="adoptions-excel" class="btn btn-sm">
-                        <i class="fa-regular fa-file-excel"></i> Export Excel
+                        <i class="fa-regular fa-file-excel"></i> {{ __('common.export_excel') }}
                     </a>
                     <a href="adoptions-pdf" class="btn btn-sm">
-                        <i class="fa-regular fa-file-pdf"></i> Export PDF
+                        <i class="fa-regular fa-file-pdf"></i> {{ __('common.export_pdf') }}
                     </a>
                 </div>
 
@@ -110,18 +110,18 @@
 
                 <form method="GET" class="filter-form">
                     <div>
-                        <label>Data Inicial:</label>
+                        <label>{{__('common.inicial_date')}}:</label>
                         <input type="date" name="inicioData" value="{{ request('inicioData') }}">
                     </div>
 
                     <div>
-                        <label>Data Final:</label>
+                        <label>{{__('common.final_date')}}:</label>
                         <input type="date" name="fimData" value="{{ request('fimData') }}">
                     </div>
 
                     <div>
                         <button type="submit" class="btn btn-success btn-sm">
-                            Filtrar
+                            {{__('common.search')}}
                         </button>
                     </div>
                 </form>
@@ -130,10 +130,10 @@
 
                 <div>
                     <a href="entradas-excel" class="btn btn-sm">
-                        <i class="fa-regular fa-file-excel"></i> Export Excel
+                        <i class="fa-regular fa-file-excel"></i> {{ __('common.export_excel') }}
                     </a>
                     <a href="entradas-pdf" class="btn btn-sm">
-                        <i class="fa-regular fa-file-pdf"></i> Export PDF
+                        <i class="fa-regular fa-file-pdf"></i> {{ __('common.export_pdf') }}
                     </a>
                 </div>
 

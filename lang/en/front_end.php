@@ -106,6 +106,11 @@ return [
         'description' => 'No description available',
         'adopt_button' => 'I WANT ADOPT',
         'behavior' => '<strong>Behavior:</strong>',
+        'microchip' => 'Microchip',
+        'vaccines' => 'Vaccines',
+        'size_label' => 'Size',
+        'yes' => 'Yes',
+        'no' => 'No',
         'form_n' => 'Form No.'
         ],
 

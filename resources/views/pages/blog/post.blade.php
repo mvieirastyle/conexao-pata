@@ -32,14 +32,14 @@
                 @if(Auth::check())
                 @if(Auth::user()->id === $post->user_id)
 
-                <a href="/blog/edit/{{ $post->id }}" class="btn btn-sm" title="Editar">
+                <a href="/blog/edit/{{ $post->id }}" class="btn btn-sm" title="{{ __('common.edit') }}">
                     <i class="fas fa-edit"></i> {{__('blog.post.edit_post')}}
                 </a>
 
                 <form action="/delete/{{ $post->id }}" method="POST" class="d-inline"
                     onsubmit="return confirm('{{__('blog.post.confirmed_delete')}}');">
                     @csrf
-                    <button type="submit" class="btn btn-sm" title="Eliminar">
+                    <button type="submit" class="btn btn-sm" title="{{ __('common.delete') }}">
                         <i class="fas fa-trash"></i>
                     </button>
                 </form>

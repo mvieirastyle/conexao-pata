@@ -64,7 +64,7 @@ class AdoptionsChart
         }
 
         $horizontalChart = $this->chart->horizontalBarChart()
-            ->setTitle('Quantidade de Animais Adotados por Mês')
+            ->setTitle(__('common.title_adoptions_chart'))
             ->setXAxis($labels)
             ->setGrid(color: '#bebebe', opacity: 0.1, strokeDashArray: 10)
             ->setColors(['#00aa69', '#ffaf46']);

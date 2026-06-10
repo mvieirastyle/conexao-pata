@@ -70,7 +70,7 @@
                         </span>
                         <span class="text-muted">|</span>
                         <span><i class="fas fa-ruler"></i>
-                            Porte {{ $animal->porte}}
+                            {{ __('front_end.details.size_label') }} {{ $animal->porte}}
                         </span>
                     </div>
                 </div>
@@ -89,14 +89,14 @@
                     @if (!empty($animal->microchip))
                     <p class="text-muted">
                         <i class="fa-solid fa-microchip"></i>
-                        <strong>Microchip:</strong>
-                        {{ $animal->microchip ? 'Sim' : 'Não'  }}
+                        <strong>{{ __('front_end.details.microchip') }}:</strong>
+                        {{ $animal->microchip ? __('front_end.details.yes') : __('front_end.details.no') }}
                     </p>
                     @endif
                     @if (!empty($vacinas) && $vacinas->isNotEmpty())
                     <p class="text-muted">
                         <i class="fa-solid fa-syringe"></i>
-                        <strong>Vacinas:</strong>
+                        <strong>{{ __('front_end.details.vaccines') }}:</strong>
                         @foreach ($vacinas as $vacina)
                             <span class="badge bg-success text-white me-1">{{ $vacina->type }}</span>
                         @endforeach

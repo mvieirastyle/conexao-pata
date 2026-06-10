@@ -10,7 +10,7 @@
 
                     <div class="card-header bg-success text-white text-center py-4">
                         <h3 class="mb-0 fw-bold">
-                            <i class="fas fa-envelope-open-text me-2"></i>Verificar Email
+                            <i class="fas fa-envelope-open-text me-2"></i>{{ __('pass.verify_email_title') }}
                         </h3>
                     </div>
 
@@ -23,8 +23,7 @@
                         @endif
 
                         <p class="mb-4">
-                            Enviámos um link de verificação para o teu email<br>
-                            Por favor verifica a tua caixa de entrada e clica no link para ativar a conta.
+                            {!! __('pass.verify_email_text') !!}
                         </p>
 
                         <form method="POST" action="{{ route('verification.send') }}">
@@ -32,7 +31,7 @@
 
                             <div class="d-grid mb-3">
                                 <button type="submit" class="btn btn-success btn-lg text-white">
-                                    <i class="fas fa-paper-plane me-2"></i>Reenviar Email
+                                    <i class="fas fa-paper-plane me-2"></i>{{ __('pass.resend_email') }}
                                 </button>
                             </div>
                         </form>
@@ -43,7 +42,7 @@
 
                 <div class="card-footer text-center py-3 bg-light">
                     <p class="mb-0 small">
-                        Não recebeste o email? Clica para reenviar.
+                        {{ __('pass.verify_email_footer') }}
                     </p>
                 </div>
 

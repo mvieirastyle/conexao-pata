@@ -20,7 +20,7 @@
     @endif
 
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1><i class="fas fa-tools"></i> Filtragem de Postagens</h1>
+        <h1><i class="fas fa-tools"></i> {{ __('blog.manage_posts.title') }}</h1>
     </div>
 
     <div class="row g-4">
@@ -48,17 +48,17 @@
 
                 <div class="d-flex gap-2 pb-4 px-3">
                     <form action="/admin/blog/{{ $post->id }}/post/reject" method="POST" style="display: inline;"
-                        onsubmit="return confirm('Tem certeza que deseja rejeitar este post?');">
+                        onsubmit="return confirm('{{ __('blog.manage_posts.confirm_reject') }}');">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-danger">
-                            <i class="fa-solid fa-x"></i> Negar
+                            <i class="fa-solid fa-x"></i> {{ __('blog.manage_posts.reject') }}
                         </button>
                     </form>
 
                     <form action="/admin/blog/{{ $post->id }}/post/accept" method="POST" style="display: inline;">
                         @csrf
                         <button type="submit" class="btn btn-sm btn-success">
-                            <i class="fas fa-check"></i> Aceitar
+                            <i class="fas fa-check"></i> {{ __('blog.manage_posts.accept') }}
                         </button>
                     </form>
                 </div>
@@ -68,9 +68,9 @@
         <div class="col-12">
             <div class="card text-center shadow-sm border-0 p-5">
                 <i class="fas fa-newspaper fa-3x mb-3 text-muted"></i>
-                <h5 class="text-muted">Nenhuma postagem encontrada</h5>
+                <h5 class="text-muted">{{ __('blog.manage_posts.empty_title') }}</h5>
                 <p class="text-muted mb-0">
-                    Quando houver posts para revisão, eles aparecerão aqui.
+                    {{ __('blog.manage_posts.empty_text') }}
                 </p>
             </div>
         </div>

@@ -160,14 +160,14 @@
                         <form method="POST" action="/admin/animal/adoption-request/{{ $formAdoption->id }}/reject">
                             @csrf
                             <button class="btn btn-outline-danger btn-lg">
-                                Negar pedido
+                                {{ __('adoption.reject_request') }}
                             </button>
                         </form>
 
                         <form method="POST" action="/admin/animal/adoption-requests/{{ $formAdoption->id }}/accept">
                             @csrf
                             <button class="btn btn-outline-success btn-lg">
-                                Aceitar pedido
+                                {{ __('adoption.accept_request') }}
                             </button>
                         </form>
 

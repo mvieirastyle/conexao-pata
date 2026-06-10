@@ -235,14 +235,14 @@
                         <form method="POST" action="/admin/animal/volunteer-requests/{{ $formVolunteer->id }}/reject">
                             @csrf
                             <button type="submit" class="btn btn-outline-danger btn-lg">
-                                Negar pedido de Voluntariado
+                                {{ __('volunteer.reject_volunteer_request') }}
                             </button>
                         </form>
 
                         <form method="POST" action="/admin/animal/volunteer-requests/{{ $formVolunteer->id }}/accept">
                             @csrf
                             <button type="submit" class="btn btn-outline-success btn-lg">
-                                Aceitar pedido de Voluntariado
+                                {{ __('volunteer.accept_volunteer_request') }}
                             </button>
                         </form>
                     </div>

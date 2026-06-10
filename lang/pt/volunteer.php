@@ -106,7 +106,17 @@ return [
     'residence_apartment' => 'Apartamento',
     'residence_house' => 'Casa',
     'residence_farm' => 'Quinta',
+
+    'reject_fat_request' => 'Negar pedido de FAT',
+    'accept_fat_request' => 'Aceitar pedido de FAT',
+    'reject_volunteer_request' => 'Negar pedido de Voluntariado',
+    'accept_volunteer_request' => 'Aceitar pedido de Voluntariado',
+    'pending_fat_requests' => 'Pedidos Pendentes de FAT',
+    'accepted_fat_requests' => 'Pedidos Aceitos de FAT',
+    'empty_fat_requests' => 'Nenhum pedido de FAT encontrado.',
+    'pending_volunteer_requests' => 'Pedidos Pendentes de Voluntariado',
+    'accepted_volunteer_requests' => 'Pedidos Aceitos de Voluntariado',
+    'empty_volunteer_requests' => 'Nenhum pedido de voluntariado encontrado.',
 ];
 
 ?>
-

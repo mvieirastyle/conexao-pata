@@ -159,14 +159,14 @@
                         <form method="POST" action="/admin/animal/fat-requests/{{ $formFat->id }}/reject">
                             @csrf
                             <button type="submit" class="btn btn-outline-danger btn-lg">
-                                Negar pedido de FAT
+                                {{ __('volunteer.reject_fat_request') }}
                             </button>
                         </form>
 
                         <form method="POST" action="/admin/animal/fat-requests/{{ $formFat->id }}/accept">
                             @csrf
                             <button type="submit" class="btn btn-outline-success btn-lg">
-                                Aceitar pedido de FAT
+                                {{ __('volunteer.accept_fat_request') }}
                             </button>
                         </form>
                     </div>

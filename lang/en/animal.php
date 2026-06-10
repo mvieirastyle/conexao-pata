@@ -31,6 +31,13 @@ return [
         'administration_panel'=> 'Administration Panel',
         'see_site' => 'See Site',
         'filtering' => 'Filtering',
+        'manage_blog' => 'Manage Blog',
+        'manage_posts' => 'Manage Posts',
+        'manage_comments' => 'Manage Comments',
+        'orders_list' => 'Orders List',
+        'orders_adoption' => 'Adoption Orders',
+        'orders_vollunteers' => 'Volunteer Orders',
+        'orders_fat' => 'FAT Orders',
     ],
 
     'animals' => 'Animals',

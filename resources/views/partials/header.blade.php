@@ -77,8 +77,8 @@
                         <x-heroicon-o-language style="width:23px; height:23px;" />
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="/language/en">en</a></li>
-                        <li><a class="dropdown-item" href="/language/pt">pt</a></li>
+                        <li><a class="dropdown-item" href="/language/en">EN 🇺🇸</a></li>
+                        <li><a class="dropdown-item" href="/language/pt">PT 🇵🇹</a></li>
                     </ul>
                 </li>
             </ul>

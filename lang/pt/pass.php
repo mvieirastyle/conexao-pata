@@ -13,6 +13,10 @@ return [
     'reset_button' => 'Redefinir Password',
     'remember_password' => 'Lembra-te da password?',
     'login' => 'Login',
+    'verify_email_title' => 'Verificar Email',
+    'verify_email_text' => 'Enviámos um link de verificação para o teu email<br>Por favor verifica a tua caixa de entrada e clica no link para ativar a conta.',
+    'resend_email' => 'Reenviar Email',
+    'verify_email_footer' => 'Não recebeste o email? Clica para reenviar.',
 ];
 
 ?>

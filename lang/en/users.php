@@ -6,6 +6,7 @@ return[
     'confirmed' => 'Are you sure you want to get rid of this user?',
     'add_user' => 'Add User',
     'filter_type'=> 'User type',
+    'empty_users' => 'No users found.',
 
      'columns' => [
         'picture' => 'Picture',

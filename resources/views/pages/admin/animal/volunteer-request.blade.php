@@ -36,14 +36,14 @@
                 <div class="input-group-text">
                     <i class="fa-solid fa-envelope"></i>
                 </div>
-                <input type="text" class="form-control" placeholder="Email" name="email" value="{{ request('email') }}">
+                <input type="text" class="form-control" placeholder="{{ __('common.email_placeholder') }}" name="email" value="{{ request('email') }}">
             </div>
 
             <div class="input-group">
                 <div class="input-group-text">
                     <i class="fa-solid fa-phone"></i>
                 </div>
-                <input type="text" class="form-control" placeholder="Telefone / Telemovel" name="phone"
+                <input type="text" class="form-control" placeholder="{{ __('common.phone_placeholder') }}" name="phone"
                     value="{{ request('phone') }}">
             </div>
 
@@ -62,7 +62,7 @@
         <li class="nav-item" role="presentation">
             <button class="nav-link {{ $activeTab === 'pendentes' ? 'active' : '' }}" id="home-tab" data-bs-toggle="tab"
                 data-bs-target="#home-tab-pane" type="button">
-                Pendentes
+                {{ __('common.pending') }}
             </button>
 
             <div id="loader" class="loader" style="display: none;"></div>
@@ -70,14 +70,14 @@
         <li class="nav-item" role="presentation">
             <button class="nav-link {{ $activeTab === 'aceitos' ? 'active' : '' }}" id="accept-tab" data-bs-toggle="tab"
                 data-bs-target="#accept-tab-pane" type="button">
-                Aprovadas
+                {{ __('common.approved') }}
             </button>
     </ul>
     <div class="tab-content" id="myTabContent">
         <div class="tab-pane fade {{ $activeTab === 'pendentes' ? 'show active' : '' }}" id="home-tab-pane">
             <div class="card-header bg-dark text-white py-2 d-flex justify-content-between align-items-center">
                 <div>
-                    <h5 class="mb-0">Pedidos Pendentes de voluntariado</h5>
+                    <h5 class="mb-0">{{ __('volunteer.pending_volunteer_requests') }}</h5>
                 </div>
             </div>
 
@@ -88,12 +88,12 @@
                             <thead class="table-light">
                                 <tr>
                                     <th>ID</th>
-                                    <th>Nome do Candidato</th>
-                                    <th>Email</th>
-                                    <th>Telefone</th>
-                                    <th>Data Nascimento</th>
-                                    <th>Estado</th>
-                                    <th class="text-end">Informações</th>
+                                    <th>{{ __('common.applicant_name') }}</th>
+                                    <th>{{ __('common.email') }}</th>
+                                    <th>{{ __('common.phone') }}</th>
+                                    <th>{{ __('common.birth_date') }}</th>
+                                    <th>{{ __('common.status') }}</th>
+                                    <th class="text-end">{{ __('common.information') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -107,22 +107,22 @@
                                         \Illuminate\Support\Carbon::parse($request->birth_date)->format('d/m/Y') : '-'
                                         }}</td>
                                     <td> @if ($request->accept)
-                                        <span class="badge bg-success">Aceito</span>
+                                        <span class="badge bg-success">{{ __('common.accepted') }}</span>
                                         @else
-                                        <span class="badge bg-secondary">Esperando</span>
+                                        <span class="badge bg-secondary">{{ __('common.waiting') }}</span>
                                         @endif
                                     </td>
 
                                     </td>
                                     <td class="text-end">
                                         <a href="/admin/animal/volunteer-requests/{{ $request->id }}"
-                                            class="btn btn-sm btn-primary me-1" title="Informações"><i
+                                            class="btn btn-sm btn-primary me-1" title="{{ __('common.information') }}"><i
                                                 class="fa-solid fa-circle-info"></i></a>
                                     </td>
                                 </tr>
                                 @empty
                                 <tr>
-                                    <td colspan="9" class="text-center py-4">Nenhum pedido de voluntariado encontrado.
+                                    <td colspan="9" class="text-center py-4">{{ __('volunteer.empty_volunteer_requests') }}
                                     </td>
                                 </tr>
                                 @endforelse
@@ -139,7 +139,7 @@
     <div class="tab-pane fade {{ $activeTab === 'aceitos' ? 'show active' : '' }}" id="accept-tab-pane">
         <div class="card-header bg-dark text-white py-2 d-flex justify-content-between align-items-center">
             <div>
-                <h5 class="mb-0">Pedidos Aceitos de voluntariado</h5>
+                <h5 class="mb-0">{{ __('volunteer.accepted_volunteer_requests') }}</h5>
             </div>
         </div>
 
@@ -150,12 +150,12 @@
                         <thead class="table-light">
                             <tr>
                                 <th>ID</th>
-                                <th>Nome do Candidato</th>
-                                <th>Email</th>
-                                <th>Telefone</th>
-                                <th>Data Nascimento</th>
-                                <th>Estado</th>
-                                <th class="text-end">Informações</th>
+                                <th>{{ __('common.applicant_name') }}</th>
+                                <th>{{ __('common.email') }}</th>
+                                <th>{{ __('common.phone') }}</th>
+                                <th>{{ __('common.birth_date') }}</th>
+                                <th>{{ __('common.status') }}</th>
+                                <th class="text-end">{{ __('common.information') }}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -169,22 +169,22 @@
                                     \Illuminate\Support\Carbon::parse($request->birth_date)->format('d/m/Y') : '-' }}
                                 </td>
                                 <td> @if ($request->accept === 1)
-                                    <span class="badge bg-success">Aceitos</span>
+                                    <span class="badge bg-success">{{ __('common.accepted') }}</span>
                                     @else
-                                    <span class="badge bg-secondary">Pendentes</span>
+                                    <span class="badge bg-secondary">{{ __('common.pending') }}</span>
                                     @endif
                                 </td>
 
                                 </td>
                                 <td class="text-end">
                                     <a href="/admin/animal/volunteer-requests/{{ $request->id }}"
-                                        class="btn btn-sm btn-primary me-1" title="Informações"><i
+                                        class="btn btn-sm btn-primary me-1" title="{{ __('common.information') }}"><i
                                             class="fa-solid fa-circle-info"></i></a>
                                 </td>
                             </tr>
                             @empty
                             <tr>
-                                <td colspan="9" class="text-center py-4">Nenhum pedido de voluntariado encontrado.</td>
+                                <td colspan="9" class="text-center py-4">{{ __('volunteer.empty_volunteer_requests') }}</td>
                             </tr>
                             @endforelse
                         </tbody>

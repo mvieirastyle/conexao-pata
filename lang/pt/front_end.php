@@ -105,6 +105,11 @@ return [
         'description' => 'Sem descrição disponível',
         'adopt_button' => 'QUERO ADOTAR',
         'behavior' => '<strong>Comportamento:</strong>',
+        'microchip' => 'Microchip',
+        'vaccines' => 'Vacinas',
+        'size_label' => 'Porte',
+        'yes' => 'Sim',
+        'no' => 'Não',
         'form_n' => 'Ficha Nº',
     ],
 

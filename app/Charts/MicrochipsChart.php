@@ -33,7 +33,7 @@ class MicrochipsChart
         }
 
         return $this->chart->pieChart()
-            ->setTitle('Quantidade de Animais com Microchip por Tipo')
+            ->setTitle(__('common.title_microchips_chart'))
             ->addData($data)
             ->setLabels($labels)
             ->setColors(['#00aa69', '#ffaf46', '#008ffb']);

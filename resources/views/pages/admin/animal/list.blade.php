@@ -101,10 +101,10 @@
             </div>
             <div class="text-end">
                 <a href="list/export" class="btn text-white">
-                    <i class="fa-regular fa-file-excel"></i> Export Excel
+                    <i class="fa-regular fa-file-excel"></i> {{ __('common.export_excel') }}
                 </a>
                 <a href="list/animais-pdf" class="btn text-white">
-                    <i class="fa-regular fa-file-pdf"></i> Export PDF
+                    <i class="fa-regular fa-file-pdf"></i> {{ __('common.export_pdf') }}
                 </a>
             </div>
 
@@ -150,12 +150,12 @@
                             </td>
                             <td class="text-end">
                                 <a href="/admin/animal/edit/{{$animal->id}}" class="btn btn-sm btn-primary me-1"
-                                    title="Editar"><i class="fas fa-edit"></i></a>
+                                    title="{{ __('common.edit') }}"><i class="fas fa-edit"></i></a>
 
                                 <form action="/admin/animal/delete/{{$animal->id}}" method="POST" class="d-inline"
                                     onsubmit="return confirm('{{__('animal.confirmed')}}');">
                                     @csrf
-                                    <button type="submit" class="btn btn-sm btn-danger" title="Eliminar">
+                                    <button type="submit" class="btn btn-sm btn-danger" title="{{ __('common.delete') }}">
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>

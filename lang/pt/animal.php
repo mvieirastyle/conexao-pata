@@ -30,6 +30,13 @@ return [
         'administration_panel'=> 'Painel de Administração',
         'see_site' => 'Ver Site',
         'filtering' => 'Filtragem',
+        'manage_blog' => 'Gerir Blog',
+        'manage_posts' => 'Gerir Publicações',
+        'manage_comments' => 'Gerir Comentários',
+        'orders_list' => 'Lista de Pedidos',
+        'orders_adoption' => 'Pedidos de Adoção',
+        'orders_vollunteers' => 'Pedidos de Voluntariado',
+        'orders_fat' => 'Pedidos de FAT',
     ],
 
     'animals' => 'Animais',

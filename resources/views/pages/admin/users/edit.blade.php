@@ -6,7 +6,7 @@
         <div class="col-lg-7">
             <div class="card shadow">
                 <div class="card-header bg-success text-white">
-                    <h4 class="mb-0"><i class="fas fa-edit"></i> Editar Utilizador</h4>
+                    <h4 class="mb-0"><i class="fas fa-edit"></i> {{ __('users.form.edit_user') }}</h4>
                 </div>
                 <div class="card-body">
                     @if ($errors->any())

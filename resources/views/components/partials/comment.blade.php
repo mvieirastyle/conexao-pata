@@ -10,7 +10,7 @@
             <li>
                 <button wire:click="deleteComment({{ $comment->id }})"
                     wire:confirm="{{ __('blog.post.confirmed_delete') }}" class="dropdown-item text-danger">
-                    <i class="fas fa-trash"></i> Delete
+                    <i class="fas fa-trash"></i> {{ __('blog.post.delete') }}
                 </button>
             </li>
         </ul>
@@ -30,8 +30,8 @@
             </div>
             <button wire:click="toggleReply({{ $comment->id }})" type="button"
                 class="btn btn-sm btn-outline-secondary mb-2 @guest opacity-50 cursor-not-allowed @endguest" @guest
-                disabled title="Você precisa estar logado para responder" @endguest>
-                Reply
+                disabled title="{{ __('blog.post.login_to_reply') }}" @endguest>
+                {{ __('blog.post.reply') }}
             </button>
             @if ($replyingTo === $comment->id)
             <div class="mt-2">

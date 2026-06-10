@@ -64,4 +64,9 @@ return [
     'term_responsibility' => 'Declaro que assumo total responsabilidade pelos cuidados, alimentação, segurança e bem-estar do animal adotado, comprometendo-me a cumprir todas as normas do abrigo e a fornecer atenção adequada ao animal.',
 
     'submit_button' => 'Enviar pré adoção',
+    'reject_request' => 'Negar pedido',
+    'accept_request' => 'Aceitar pedido',
+    'pending_requests' => 'Pedidos Pendentes de Adoção',
+    'accepted_requests' => 'Pedidos Aceitos de Adoção',
+    'empty_requests' => 'Nenhum pedido de adoção encontrado.',
 ];

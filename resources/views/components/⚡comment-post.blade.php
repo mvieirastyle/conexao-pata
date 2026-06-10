@@ -27,7 +27,7 @@ new class extends Component
             Comment::createComment($data);
             $this->comment[$key] = '';
             
-            return redirect('/blog/post/' . $this->post->id)->with('success', 'Seu comentário foi submetido com sucesso, aguarde que um administrador valide-o. Obrigada pela sua contribuição!');
+            return redirect('/blog/post/' . $this->post->id)->with('success', __('blog.post.submitted_success'));
         }   
 
     }

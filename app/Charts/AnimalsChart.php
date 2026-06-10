@@ -42,7 +42,7 @@ class AnimalsChart
         }
 
         return $this->chart->barChart()
-            ->setTitle('Quantidade de Animais por Tipo e Sexo')
+            ->setTitle(__('common.title_animals_chart'))
             ->addData($maleData, 'Machos')
             ->addData($femaleData, 'Fêmeas')
             ->setColors(['#00aa69', '#ffaf46'])

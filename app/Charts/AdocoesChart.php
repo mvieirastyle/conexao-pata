@@ -70,7 +70,7 @@ class AdocoesChart
     }
 
     return $this->chart->areaChart()
-        ->setTitle('Qnt. Animais Acolhidos e Adotados por Mês')
+        ->setTitle(__('common.title_adoption_chart'))
         ->addData($adocoesData, 'Adoções')
         ->addData( $entradasData, 'Acolhimentos')
         ->setXAxis($labels)

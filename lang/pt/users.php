@@ -6,6 +6,7 @@ return[
     'confirmed' => 'Tem certeza que deseja eliminar este utilizador?',
     'add_user' => 'Adicionar Utilizador',
     'filter_type'=> 'Tipo de Utilizador',
+    'empty_users' => 'Nenhum utilizador encontrado.',
 
      'columns' => [
         'picture' => 'Foto',
