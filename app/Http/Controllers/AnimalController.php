@@ -12,95 +12,63 @@ use App\Exports\AnimalsExport;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Carbon;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Support\Facades\Cache;
 
 class AnimalController extends Controller
 {
-    private function getAnimalsCacheKey()
-    {
-        $filters = request()->only(['animal', 'sex', 'age', 'size', 'disponivel']);
-        $page = request('page', 1);
-
-        $version = Cache::get('animals_cache_version', 1);
-
-        return 'animals_' . $version . '_' . md5(json_encode($filters) . '_page_' . $page);
-    }
-
-
     public function show()
     {
-        $animals =  Cache::remember($this->getAnimalsCacheKey(), now()->addHours(3), function () {
+        $query = Animal::query();
 
-            $query = Animal::query();
+        if (request('animal')) {
+            $query->where('category_id', request('animal'));
+        }
 
-            if (request('animal')) {
-                $query->where('category_id', request('animal'));
-            }
+        if (request('sex')) {
+            $query->where('sexo', request('sex'));
+        }
 
-            if (request('sex')) {
-                $query->where('sexo', request('sex'));
-            }
+        if (request('age')) {
+            $query->where('idade', request('age'));
+        }
 
-            if (request('age')) {
-                $query->where('idade', request('age'));
-            }
+        if (request('size')) {
+            $query->where('porte', request('size'));
+        }
 
-            if (request('size')) {
-                $query->where('porte', request('size'));
-            }
+        if (request('disponivel')) {
+            $query->where('disponivel', request('disponivel'));
+        }
 
-            if (request('disponivel')) {
-                $query->where('disponivel', request('disponivel'));
-            }
-
-            return $query->paginate(6)->withQueryString();
-        });
+        $animals = $query->paginate(6)->withQueryString();
 
         return view('pages.admin.animal.list', [
             'animals' => $animals,
         ]);
     }
 
-    private function getAdoptionsCacheKey()
-    {
-        $filters = request()->only(['email', 'phone', 'tab']);
-        $page = request('page', 1);
-
-        $version = Cache::get('adoptions_cache_version', 1);
-
-        return 'adoptions_' . $version . '_' . md5(json_encode($filters) . '_page_' . $page);
-    }
-
     public function showAdoptionRequests()
     {
         $activeTab = request('tab', 'pendentes');
 
-        $formAdoptions = Cache::remember(
-            $this->getAdoptionsCacheKey(),
-            now()->addHours(3),
-            function () use ($activeTab) {
+        $query = FormAdoption::with('animal');
 
-                $query = FormAdoption::with('animal');
+        if (request('email')) {
+            $query->where('email', 'like', '%' . request('email') . '%');
+        }
 
-                if (request('email')) {
-                    $query->where('email', 'like', '%' . request('email') . '%');
-                }
+        if (request('phone')) {
+            $query->where('phone', 'like', '%' . request('phone') . '%');
+        }
 
-                if (request('phone')) {
-                    $query->where('phone', 'like', '%' . request('phone') . '%');
-                }
+        if ($activeTab === 'pendentes') {
+            $query->where('accept', 0);
+        }
 
-                if ($activeTab === 'pendentes') {
-                    $query->where('accept', 0);
-                }
+        if ($activeTab === 'aceitos') {
+            $query->where('accept', 1);
+        }
 
-                if ($activeTab === 'aceitos') {
-                    $query->where('accept', 1);
-                }
-
-                return $query->latest()->paginate(10)->withQueryString();
-            }
-        );
+        $formAdoptions = $query->latest()->paginate(10)->withQueryString();
 
         return view('pages.admin.animal.adoption-request', [
             'formAdoptions' => $formAdoptions,
@@ -135,8 +103,6 @@ class AnimalController extends Controller
 
         Animal::createNew($request->all());
 
-        Cache::increment($this->getAnimalsCacheKey());
-
         return redirect('/admin/animal/list')->with('success', 'Animal adicionado com sucesso');
     }
 
@@ -164,16 +130,12 @@ class AnimalController extends Controller
 
         Animal::updateAnimal($id, $request->all());
 
-        Cache::increment($this->getAnimalsCacheKey());
-
         return redirect('/admin/animal/list')->with('success', 'Animal editado com sucesso');
     }
 
     public function delete($id)
     {
         Animal::deleteAnimal($id);
-
-        Cache::increment($this->getAnimalsCacheKey());
 
         return redirect('/admin/animal/list')->with('success', 'Animal removido com sucesso');
     }
@@ -410,8 +372,6 @@ class AnimalController extends Controller
             'accept' => 1,
         ]);
 
-        Cache::forget('adoptions_cache_version');
-
         return redirect('/admin/animal/adoption-requests')->with('success', 'Pedido de adoção aceito e animal marcado como indisponível.');
     }
 
@@ -420,8 +380,6 @@ class AnimalController extends Controller
         FormAdoption::findOrFail($id);
 
         FormAdoption::delete();
-
-        Cache::forget('adoptions_cache_version');
 
         return redirect('/admin/animal/adoption-requests')->with('success', 'Pedido de adoção negado.');
     }

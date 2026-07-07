@@ -10,7 +10,6 @@ use App\Models\FormFat;
 use App\Models\FormVolunteer;
 use App\Models\FormAdoption;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Mail;
 
 class FormsController extends Controller
@@ -137,46 +136,29 @@ class FormsController extends Controller
     }
 
 
-    private function getVolunteersCacheKey()
-    {
-        $filters = request()->only(['email', 'phone', 'tab']);
-        $page = request('page', 1);
-
-        $version = Cache::get('volunteers_cache_version', 1);
-
-        return 'volunteers_' . $version . '_' . md5(json_encode($filters) . '_page_' . $page);
-    }
-
     public function showVolunteerRequests()
     {
         $activeTab = request('tab', 'pendentes');
 
-        $formVolunteers = Cache::remember(
-            $this->getVolunteersCacheKey(),
-            now()->addHours(3),
-            function () use ($activeTab) {
+        $query = FormVolunteer::query();
 
-                $query = FormVolunteer::query();
+        if (request('email')) {
+            $query->where('email', 'like', '%' . request('email') . '%');
+        }
 
-                if (request('email')) {
-                    $query->where('email', 'like', '%' . request('email') . '%');
-                }
+        if (request('phone')) {
+            $query->where('phone', 'like', '%' . request('phone') . '%');
+        }
 
-                if (request('phone')) {
-                    $query->where('phone', 'like', '%' . request('phone') . '%');
-                }
+        if ($activeTab === 'pendentes') {
+            $query->where('accept', 0);
+        }
 
-                if ($activeTab === 'pendentes') {
-                    $query->where('accept', 0);
-                }
+        if ($activeTab === 'aceitos') {
+            $query->where('accept', 1);
+        }
 
-                if ($activeTab === 'aceitos') {
-                    $query->where('accept', 1);
-                }
-
-                return $query->orderBy('id', 'desc')->paginate(10)->withQueryString();
-            }
-        );
+        $formVolunteers = $query->orderBy('id', 'desc')->paginate(10)->withQueryString();
 
         return view('pages.admin.animal.volunteer-request', [
             'formVolunteers' => $formVolunteers,
@@ -201,8 +183,6 @@ class FormsController extends Controller
             'accept' => 1,
         ]);
 
-        Cache::forget('volunteers_cache_version');
-
         return redirect('/admin/animal/volunteer-requests')->with('success', 'Pedido de voluntariado aceito. Já entramos em contato com o voluntario');
     }
 
@@ -212,52 +192,33 @@ class FormsController extends Controller
 
         $volunteer->delete();
 
-        Cache::forget('volunteers_cache_version');
-
         return redirect('/admin/animal/volunteer-requests')->with('success', 'Pedido de voluntariado negado. Já entramos em contato com o voluntario');
     }
 
-        private function getFatsCacheKey()
-    {
-        $filters = request()->only(['email', 'phone', 'tab']);
-        $page = request('page', 1);
-
-        $version = Cache::get('fats_cache_version', 1);
-
-        return 'fats_' . $version . '_' . md5(json_encode($filters) . '_page_' . $page);
-    }
-
     public function showFatRequests(){
-      $activeTab = request('tab', 'pendentes');
+        $activeTab = request('tab', 'pendentes');
 
-        $formFat = Cache::remember(
-            $this->getFatsCacheKey(),
-            now()->addHours(3),
-            function () use ($activeTab) {
+        $query = FormFat::query();
 
-                $query = FormFat::query();
+        if (request('email')) {
+            $query->where('email', 'like', '%' . request('email') . '%');
+        }
 
-                if (request('email')) {
-                    $query->where('email', 'like', '%' . request('email') . '%');
-                }
+        if (request('phone')) {
+            $query->where('phone', 'like', '%' . request('phone') . '%');
+        }
 
-                if (request('phone')) {
-                    $query->where('phone', 'like', '%' . request('phone') . '%');
-                }
+        if ($activeTab === 'pendentes') {
+            $query->where('accept', 0);
+        }
 
-                if ($activeTab === 'pendentes') {
-                    $query->where('accept', 0);
-                }
+        if ($activeTab === 'aceitos') {
+            $query->where('accept', 1);
+        }
 
-                if ($activeTab === 'aceitos') {
-                    $query->where('accept', 1);
-                }
+        $formFat = $query->orderBy('id', 'desc')->paginate(10)->withQueryString();
 
-                return $query->orderBy('id', 'desc')->paginate(10)->withQueryString();
-            }
-        );
-
-          return view('pages.admin.animal.fat-requests', [
+        return view('pages.admin.animal.fat-requests', [
             'formFat' => $formFat,
             'activeTab' => $activeTab,
         ]);

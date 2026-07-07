@@ -19,8 +19,9 @@ use App\Exports\MicrochipsChartExport;
 use App\Exports\EntradasChartExport;
 use App\Http\Controllers\FormsController;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Auth\Events\Verified;
 
 Route::get('/', [HomeController::class, 'show']);
 
@@ -75,10 +76,23 @@ Route::get('/email/verify', function () {
     return view('auth.verify-email');
 })->name('verification.notice');
 
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-    $request->fulfill();
-    return redirect('/');
-})->middleware(['auth', 'signed'])->name('verification.verify');;
+Route::get('/email/verify/{id}/{hash}', function (Request $request, $id, $hash) {
+    $user = User::findOrFail($id);
+
+    if (! hash_equals((string) $hash, sha1($user->getEmailForVerification()))) {
+        abort(403);
+    }
+
+    if ($user->hasVerifiedEmail()) {
+        return redirect('/login')->with('success', 'Email já verificado. Pode efetuar login.');
+    }
+
+    if ($user->markEmailAsVerified()) {
+        event(new Verified($user));
+    }
+
+    return redirect('/login')->with('success', 'Email verificado com sucesso. Pode efetuar login.');
+})->middleware(['signed'])->name('verification.verify');
 
 Route::post('/email/verification-notification', function () {
     $user = session('user');

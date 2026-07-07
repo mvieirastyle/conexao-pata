@@ -18,7 +18,7 @@
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
                                         <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                            id="loginEmail" name="email" placeholder="admin@batalha.pt"
+                                            id="loginEmail" name="email" placeholder="email"
                                             value="{{ old('email') }}" required>
                                         @error('email')
                                             <div class="invalid-feedback">

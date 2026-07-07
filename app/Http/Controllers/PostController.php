@@ -8,35 +8,17 @@ use App\Models\User;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class PostController extends Controller
 {
-    private function getPostCacheKey($id)
-    {
-        return 'post_' . $id;
-    }
-    private function getPostsCacheKey()
-    {
-        $page = request('page', 1);
-
-        $version = Cache::get('posts_cache_version', 1);
-
-        return 'posts_' . $version . '_page_' . $page;
-    }
-
     public function show(): View
     {
-        $data = Cache::remember($this->getPostsCacheKey(), now()->addHours(1), function () {
-            $posts = Post::where('status', 'aprovado')->paginate(6)->withQueryString();
-
-            return $posts;
-        });
+        $posts = Post::where('status', 'aprovado')->paginate(6)->withQueryString();
 
         return view('pages.blog.index', [
-            'posts' => $data,
+            'posts' => $posts,
             'user' => Auth::user(),
         ]);
     }
@@ -55,26 +37,21 @@ class PostController extends Controller
 
         Post::createNew($request->all(), $id);
 
-        Cache::forget($this->getPostsCacheKey());
-
         return redirect('/blog')->with('success', 'Sua publicação foi enviado com sucesso. Ela será postada assim que um administrador validar as sua informações. Obrigada pela contribuição!');
     }
 
     public function showPost(int $id)
     {
-        $data = Cache::remember($this->getPostCacheKey($id), now()->addHours(3), function () use ($id) {
+        $post = Post::findOrFail($id);
 
-            $post = Post::findOrFail($id);
+        $comments = Comment::where('post_id', $id)
+            ->latest()
+            ->get();
 
-            $comments = Comment::where('post_id', $id)
-                ->latest()
-                ->get();
-
-            return [
-                'post' => $post,
-                'comments' => $comments,
-            ];
-        });
+        $data = [
+            'post' => $post,
+            'comments' => $comments,
+        ];
 
         $url = url('/blog/post/' . $data['post']->id);
 
@@ -108,8 +85,6 @@ class PostController extends Controller
     {
         Post::deletePost($id);
 
-        Cache::forget($this->getPostsCacheKey());
-
         return redirect('/blog');
     }
 
@@ -131,8 +106,6 @@ class PostController extends Controller
 
         Post::updatePost($id, $request->all());
 
-        Cache::forget($this->getPostsCacheKey());
-
         return redirect('/blog')->with('success', 'Sua publicação foi editada com sucesso');
     }
 
@@ -152,8 +125,6 @@ class PostController extends Controller
             'status' => 'aprovado'
         ]);
 
-        Cache::forget($this->getPostsCacheKey());
-
         return redirect('/admin/blog/posts')->with('success', 'Post aprovado com sucesso!');
     }
 
@@ -165,8 +136,6 @@ class PostController extends Controller
         $post->update([
             'status' => 'negado'
         ]);
-
-        Cache::forget($this->getPostsCacheKey());
 
         return redirect('/admin/blog/posts')->with('success', 'Post rejeitado com sucesso!');
     }

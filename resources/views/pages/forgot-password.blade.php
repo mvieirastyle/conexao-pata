@@ -32,7 +32,7 @@
                                         <i class="fas fa-envelope"></i>
                                     </span>
                                     <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                        id="email" name="email" placeholder="{{ __('pass.email_placeholder') }}"
+                                        id="email" name="email" placeholder="email"
                                         value="{{ old('email') }}" required>
                                     @error('email')
                                     <div class="invalid-feedback">
